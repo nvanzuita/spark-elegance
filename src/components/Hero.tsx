@@ -1,31 +1,41 @@
 import { motion } from "framer-motion";
-import heroBg from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Video com Película de Foco */}
       <div className="absolute inset-0">
-        <img
-          src={heroBg}
-          alt="Bruna Beauty Studio"
-          className="w-full h-full object-cover"
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover blur-[4px]" /* <-- Aqui adicionamos o Blur direto no vídeo */
+        >
+          <source src="/background.webm" type="video/webm" />
+        </video>
+        
+        {/* Película (Overlay) para dar foco total à escrita */}
+        <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px]" /> 
+        {/* O 'bg-background/60' usa sua cor nude com 60% de transparência */}
       </div>
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="mb-8"
-        >
-          <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-8 rounded-full border border-gold/30 flex items-center justify-center">
-            <span className="font-display text-3xl md:text-4xl text-gold-gradient">B</span>
-          </div>
+  <motion.div
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 1.2, ease: "easeOut" }}
+    className="mb-8"
+  >
+    <div className="w-32 h-32 md:w-44 md:h-44 mx-auto mb-8 rounded-full border border-gold/30 flex items-center justify-center bg-background/20 backdrop-blur-sm overflow-hidden p-5">
+      {/* Trocamos o span pela imagem, mantendo o container intacto */}
+      <img 
+        src="/simbolo1.PNG" 
+        alt="Logo" 
+        className="w-full h-full object-contain"
+      />
+    </div>
         </motion.div>
 
         <motion.p
@@ -41,7 +51,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="font-display text-4xl md:text-6xl lg:text-7xl font-light mb-6 leading-tight"
+          className="font-display text-4xl md:text-6xl lg:text-7xl font-light mb-6 leading-tight text-foreground"
         >
           Luxury Aesthetic
           <br />
@@ -59,7 +69,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="font-elegant text-lg md:text-xl text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed"
+          className="font-elegant text-lg md:text-xl text-foreground/80 max-w-xl mx-auto mb-10 leading-relaxed"
         >
           Onde a beleza encontra a excelência. Técnicas avançadas, ambiente sofisticado
           e resultados que transformam.

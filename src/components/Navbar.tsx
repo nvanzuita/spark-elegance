@@ -52,6 +52,14 @@ const Navbar = () => {
           >
             Reservar
           </a>
+          <a
+            href="https://www.fresha.com/pt/a/studio-bruna-beauty-parede-cascais-rua-latino-coelho-j2dtyrog/booking?allOffer"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml4 px-6 py-2.5 border border-gold/30 text-xs tracking-luxury uppercase text-foreground hover:border-gold/60 hover:bg-gold/5 transition-all text-center"
+          >
+            Reservar Online
+          </a>
         </div>
 
         {/* Mobile Toggle */}

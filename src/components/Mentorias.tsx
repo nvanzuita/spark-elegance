@@ -2,10 +2,30 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const mentorias = [
-  { title: "Lash Design — Zero a Referência", description: "Formação completa para dominar a arte das pestanas e se tornar referência no mercado premium.", link: "https://brunabeauty.eu/assets/pdf/mentoria-lashdesigner.pdf" },
-  { title: "Brow Lamination", description: "Domine a técnica de laminação de sobrancelhas com acabamento impecável.", link: "https://brunabeauty.eu/assets/pdf/mentoria-brow.pdf" },
-  { title: "HydraLips", description: "Aprenda a técnica de hidratação labial premium com resultados duradouros.", link: "https://brunabeauty.eu/assets/pdf/mentoria-hydralips.pdf" },
-  { title: "Depilação a Laser", description: "Formação prática e teórica em tecnologia laser de última geração.", link: "https://brunabeauty.eu/assets/pdf/mentoria-laser.pdf" },
+  { 
+    title: "Lash Design — Zero a Referência", 
+    description: "Formação completa para dominar a arte das pestanas e se tornar referência no mercado premium.", 
+    link: "https://brunabeauty.eu/assets/pdf/mentoria-lashdesigner.pdf",
+    video: "/video/mentoria4.webm" 
+  },
+  { 
+    title: "Brow Lamination", 
+    description: "Domine a técnica de laminação de sobrancelhas com acabamento impecável.", 
+    link: "https://brunabeauty.eu/assets/pdf/mentoria-brow.pdf",
+    video: "/video/mentoria1.webm" 
+  },
+  { 
+    title: "HydraLips", 
+    description: "Aprenda a técnica de hidratação labial premium com resultados duradouros.", 
+    link: "https://brunabeauty.eu/assets/pdf/mentoria-hydralips.pdf",
+    video: "/video/mentoria3.webm" 
+  },
+  { 
+    title: "Depilação a Laser", 
+    description: "Formação prática e teórica em tecnologia laser de última geração.", 
+    link: "https://brunabeauty.eu/assets/pdf/mentoria-laser.pdf",
+    video: "/video/mentoria2.webm" 
+  },
 ];
 
 const Mentorias = () => {
@@ -13,7 +33,7 @@ const Mentorias = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section id="mentorias" className="py-24 md:py-32 px-6 bg-secondary/30">
+    <section id="mentorias" className="py-24 md:py-32 px-6 bg-background">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           ref={ref}
@@ -42,12 +62,37 @@ const Mentorias = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="group flex items-start gap-6 p-8 bg-card border border-border hover:border-gold/30 transition-all duration-500"
+              className="group relative flex items-center min-h-[250px] overflow-hidden p-8 border border-border hover:border-gold/30 transition-all duration-500 luxury-shadow"
             >
-              <span className="text-primary text-lg mt-1 shrink-0">✧</span>
-              <div>
-                <h3 className="font-display text-lg md:text-xl mb-2 group-hover:text-primary transition-colors">{mentoria.title}</h3>
-                <p className="font-body text-sm text-muted-foreground leading-relaxed">{mentoria.description}</p>
+              {/* Camada do Vídeo */}
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              >
+                <source src={mentoria.video} type="video/webm" />
+              </video>
+
+              {/* Overlay Marrom 75% para garantir leitura em cards maiores */}
+              <div className="absolute inset-0 bg-[#2A241E]/75 transition-opacity duration-500 group-hover:bg-[#2A241E]/65 z-10" />
+
+              {/* Conteúdo */}
+              <div className="relative z-20 flex gap-6 items-start">
+                <span className="text-primary text-lg mt-1 shrink-0">✧</span>
+                <div>
+                  <h3 className="font-display text-lg md:text-2xl mb-2 text-white group-hover:text-gold-gradient transition-all">
+                    {mentoria.title}
+                  </h3>
+                  <p className="font-body text-sm text-white/80 leading-relaxed max-w-md">
+                    {mentoria.description}
+                  </p>
+                  <div className="mt-4 flex items-center gap-2 text-[10px] tracking-widest uppercase text-primary opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
+                    <span>Aceder ao Programa</span>
+                    <span>→</span>
+                  </div>
+                </div>
               </div>
             </motion.a>
           ))}

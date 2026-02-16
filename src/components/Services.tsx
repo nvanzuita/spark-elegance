@@ -8,36 +8,42 @@ const services = [
     description: "Técnicas avançadas de alongamento para realçar o seu olhar com volume e naturalidade.",
     icon: "✦",
     link: "https://brunabeauty.eu/assets/pdf/catalogocilios.pdf",
+    video: "/video/pestanas.webm", // Nome do vídeo na pasta public
   },
   {
     title: "Lash Lifting",
     description: "Curvatura e hidratação dos fios naturais para um efeito de rímel duradouro e sofisticado.",
     icon: "✦",
     link: "https://brunabeauty.eu/assets/pdf/catalogolifting.pdf",
+    video: "/video/lifting.webm",
   },
   {
     title: "Sobrancelhas / Brows",
     description: "Design personalizado e micropigmentação para harmonizar as linhas do seu rosto.",
     icon: "✦",
     link: "https://brunabeauty.eu/assets/pdf/catalogobrow.pdf",
+    video: "/video/browlami.webm",
   },
   {
     title: "Depilação a Laser",
     description: "Tecnologia de ponta para uma remoção definitiva e indolor dos pelos indesejados.",
     icon: "✦",
     link: "https://brunabeauty.eu/assets/pdf/catalogobody.pdf",
+    video: "/video/depilacao.webm",
   },
   {
     title: "Estética Facial",
     description: "Protocolos exclusivos de rejuvenescimento e cuidados profundos para a saúde da sua pele.",
     icon: "✦",
     link: "https://brunabeauty.eu/assets/pdf/catalogofacial.pdf",
+    video: "/video/facial.webm",
   },
   {
     title: "Tattoo Removal",
     description: "Remoção segura e eficaz de pigmentos com tecnologia laser de última geração.",
     icon: "✦",
     link: "https://brunabeauty.eu/assets/pdf/catalogotattoo.pdf",
+    video: "/video/tattoo.webm",
   },
 ];
 
@@ -54,18 +60,39 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="group block p-8 md:p-10 bg-card border border-border hover:border-gold/30 transition-all duration-500 luxury-shadow"
+      className="group relative block overflow-hidden p-8 md:p-10 border border-border transition-all duration-500 luxury-shadow min-h-[320px] flex flex-col justify-end"
     >
-      <span className="text-primary text-2xl mb-6 block">{service.icon}</span>
-      <h3 className="font-display text-xl md:text-2xl mb-3 group-hover:text-gold-gradient transition-colors duration-300">
-        {service.title}
-      </h3>
-      <p className="font-body text-sm text-muted-foreground leading-relaxed">
-        {service.description}
-      </p>
-      <div className="mt-6 flex items-center gap-2 text-xs tracking-luxury uppercase text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <span>Ver Catálogo</span>
-        <span className="group-hover:translate-x-1 transition-transform">→</span>
+      {/* 1. Camada do Vídeo */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      >
+        <source src={service.video} type="video/webm" />
+      </video>
+
+      {/* 2. Camada de Película (Overlay Marrom 70%) */}
+      {/* Nota: Usando bg-charcoal/70 que definimos no seu CSS para manter o tom marrom escuro */}
+      <div className="absolute inset-0 bg-[#2A241E]/75 transition-opacity duration-500 group-hover:bg-[#2A241E]/60 z-10" />
+
+      {/* 3. Conteúdo (Texto e Ícone) */}
+      <div className="relative z-20">
+        <span className="text-primary text-2xl mb-4 block group-hover:scale-110 transition-transform duration-300">
+            {service.icon}
+        </span>
+        <h3 className="font-display text-xl md:text-2xl mb-3 text-white group-hover:text-gold-gradient transition-colors duration-300">
+          {service.title}
+        </h3>
+        <p className="font-body text-sm text-white/80 leading-relaxed mb-4">
+          {service.description}
+        </p>
+        
+        <div className="flex items-center gap-2 text-xs tracking-luxury uppercase text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+          <span>Ver Catálogo</span>
+          <span className="group-hover:translate-x-1 transition-transform">→</span>
+        </div>
       </div>
     </motion.a>
   );
@@ -76,7 +103,7 @@ const Services = () => {
   const isHeaderInView = useInView(headerRef, { once: true });
 
   return (
-    <section id="servicos" className="py-24 md:py-32 px-6">
+    <section id="servicos" className="py-24 md:py-32 px-6 bg-background">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           ref={headerRef}

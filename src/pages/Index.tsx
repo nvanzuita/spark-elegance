@@ -4,7 +4,10 @@ import Services from "@/components/Services";
 import Mentorias from "@/components/Mentorias";
 import About from "@/components/About";
 import Booking from "@/components/Booking";
+import Reviews from "@/components/Reviews";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import FloatingBadge from "@/components/FloatingBadge";
 
 const Index = () => {
   return (
@@ -15,6 +18,9 @@ const Index = () => {
       <Mentorias />
       <About />
       <Booking />
+      <Reviews />
+      <FAQ />
+      <FloatingBadge />
       <Footer />
     </div>
   );
