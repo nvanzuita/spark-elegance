@@ -1,48 +1,49 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { useHref } from "react-router-dom";
 
 const services = [
   {
     title: "Pestanas / Lashes",
     description: "Técnicas avançadas de alongamento para realçar o seu olhar com volume e naturalidade.",
     icon: "✦",
-    link: "https://brunabeauty.eu/assets/pdf/catalogocilios.pdf",
+    href: "/pdf/catalogocilios.pdf",
     video: "/video/pestanas.webm", // Nome do vídeo na pasta public
   },
   {
     title: "Lash Lifting",
     description: "Curvatura e hidratação dos fios naturais para um efeito de rímel duradouro e sofisticado.",
     icon: "✦",
-    link: "https://brunabeauty.eu/assets/pdf/catalogolifting.pdf",
+    href: "/pdf/catalogolifting.pdf",
     video: "/video/lifting.webm",
   },
   {
     title: "Sobrancelhas / Brows",
     description: "Design personalizado e micropigmentação para harmonizar as linhas do seu rosto.",
     icon: "✦",
-    link: "https://brunabeauty.eu/assets/pdf/catalogobrow.pdf",
+    href: "/pdf/catalogobrow.pdf",
     video: "/video/browlami.webm",
   },
   {
     title: "Depilação a Laser",
     description: "Tecnologia de ponta para uma remoção definitiva e indolor dos pelos indesejados.",
     icon: "✦",
-    link: "https://brunabeauty.eu/assets/pdf/catalogobody.pdf",
+    href: "/pdf/catalogobody.pdf",
     video: "/video/depilacao.webm",
   },
   {
     title: "Estética Facial",
     description: "Protocolos exclusivos de rejuvenescimento e cuidados profundos para a saúde da sua pele.",
     icon: "✦",
-    link: "https://brunabeauty.eu/assets/pdf/catalogofacial.pdf",
+    href: "/pdf/catalogofacial.pdf",
     video: "/video/facial.webm",
   },
   {
     title: "Tattoo Removal",
     description: "Remoção segura e eficaz de pigmentos com tecnologia laser de última geração.",
     icon: "✦",
-    link: "https://brunabeauty.eu/assets/pdf/catalogotattoo.pdf",
+    href: "/pdf/catalogotattoo.pdf",
     video: "/video/tattoo.webm",
   },
 ];
@@ -54,7 +55,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
   return (
     <motion.a
       ref={ref}
-      href={service.link}
+      href={service.href}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ opacity: 0, y: 40 }}
