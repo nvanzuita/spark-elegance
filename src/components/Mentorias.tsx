@@ -5,25 +5,25 @@ const mentorias = [
   { 
     title: "Lash Design — Zero a Referência", 
     description: "Formação completa para dominar a arte das pestanas e se tornar referência no mercado premium.", 
-    link: "https://brunabeauty.eu/assets/pdf/mentoria-lashdesigner.pdf",
+    href: "/pdf/mentoria-lashdesigner.pdf",
     video: "/video/mentoria4.webm" 
   },
   { 
     title: "Brow Lamination", 
     description: "Domine a técnica de laminação de sobrancelhas com acabamento impecável.", 
-    link: "https://brunabeauty.eu/assets/pdf/mentoria-brow.pdf",
+    href: "/pdf/mentoria-brow.pdf",
     video: "/video/mentoria1.webm" 
   },
   { 
     title: "HydraLips", 
     description: "Aprenda a técnica de hidratação labial premium com resultados duradouros.", 
-    link: "https://brunabeauty.eu/assets/pdf/mentoria-hydralips.pdf",
+    href: "/pdf/mentoria-hydralips.pdf",
     video: "/video/mentoria3.webm" 
   },
   { 
     title: "Depilação a Laser", 
     description: "Formação prática e teórica em tecnologia laser de última geração.", 
-    link: "https://brunabeauty.eu/assets/pdf/mentoria-laser.pdf",
+    href: "/pdf/mentoria-laser.pdf",
     video: "/video/mentoria2.webm" 
   },
 ];
@@ -56,7 +56,7 @@ const Mentorias = () => {
           {mentorias.map((mentoria, index) => (
             <motion.a
               key={mentoria.title}
-              href={mentoria.link}
+              href={mentoria.href}
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 30 }}
