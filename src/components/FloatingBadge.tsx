@@ -1,43 +1,67 @@
-import { motion } from "framer-motion";
-import { Ticket, ExternalLink } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Ticket, ExternalLink, X } from "lucide-react";
+import { useState } from "react";
 
 const FloatingBadge = () => {
+  // Esta linha cria a lógica de "mostrar ou esconder"
+  const [isVisible, setIsVisible] = useState(true);
+
   return (
-    <motion.a
-      href="https://rastelliportugal.com/?bg_ref=3BSrM40lRW" // Link oficial da parceria
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 2, duration: 0.8 }}
-      whileHover={{ y: -5 }}
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-4 bg-[#4A423B]/95 backdrop-blur-md border border-gold/30 p-3 pr-5 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.3)] group transition-all"
-    >
-      {/* Container do Logo */}
-      <div className="flex items-center justify-center bg-white/5 w-16 h-16 rounded-full border border-gold/10 p-2 overflow-hidden">
-        <img 
-          src="./rastelli.webp" // Adicione o logo aqui
-          alt="Rastelli Logo" 
-          className="w-full h-full object-contain"
-        />
-      </div>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 9999 }}
+        >
+          {/* BOTÃO PARA FECHAR (O "X") */}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsVisible(false);
+            }}
+            style={{
+              position: 'absolute',
+              top: '-10px',
+              left: '-10px',
+              backgroundColor: 'white',
+              color: 'black',
+              borderRadius: '50%',
+              padding: '6px',
+              cursor: 'pointer',
+              border: '1px solid #d4af37',
+              zIndex: 10000
+            }}
+          >
+            <X size={16} strokeWidth={3} />
+          </button>
 
-      {/* Informações do Cupom */}
-      <div className="flex flex-col">
-        <div className="flex items-center gap-2">
-          <span className="font-display text-white text-xs tracking-widest font-bold">PARCEIRO RASTELLI</span>
-          <ExternalLink size={10} className="text-gold/50 group-hover:text-gold transition-colors" />
-        </div>
-        <div className="flex items-center gap-1.5 mt-1.5">
-          <Ticket size={12} className="text-gold" />
-          <span className="font-body text-[14px] font-bold text-white tracking-wider ml-2">BRUNA10</span>
-          <span className="text-[12px] text-white/90 ml-2">-10%</span>
-        </div>
-      </div>
+          {/* O BADGE DA RASTELLI */}
+          <a
+            href="https://rastelliportugal.com/?bg_ref=3BSrM40lRW"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 bg-[#2A241E]/95 backdrop-blur-lg border border-gold/30 p-3 pr-6 rounded-full shadow-2xl"
+            style={{ textDecoration: 'none', display: 'flex' }}
+          >
+            <div className="flex items-center justify-center bg-white/5 w-14 h-14 rounded-full border border-gold/10 p-2 shrink-0">
+              <img src="/rastelli.webp" alt="Logo" className="w-full h-full object-contain" />
+            </div>
 
-      {/* Efeito de hover na borda */}
-      <div className="absolute inset-0 rounded-full border border-gold/0 group-hover:border-gold/40 transition-all duration-500" />
-    </motion.a>
+            <div className="flex flex-col">
+              <span className="text-white text-[10px] tracking-widest font-bold uppercase">Parceiro Rastelli</span>
+              <div className="flex items-center gap-1.5 mt-1">
+                <Ticket size={14} className="text-gold" />
+                <span className="text-[14px] font-bold text-white tracking-widest">BRUNA10</span>
+                <span className="text-[12px] text-gold font-bold ml-1">-10%</span>
+              </div>
+            </div>
+          </a>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
