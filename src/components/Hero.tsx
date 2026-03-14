@@ -12,7 +12,7 @@ const Hero = () => {
           playsInline
           className="w-full h-full object-cover blur-[4px]" /* <-- Aqui adicionamos o Blur direto no vídeo */
         >
-          <source src="/background.webm" type="video/webm" />
+          <source src="https://res.cloudinary.com/dudnl5whz/video/upload/v1773509327/background_xzpxyl.webm" />
         </video>
         
         {/* Película (Overlay) para dar foco total à escrita */}
