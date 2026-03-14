@@ -27,6 +27,15 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Isso garante que cada seção pare 100px abaixo do topo, dando espaço para a navbar */
+section {
+  scroll-margin-top: 100px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
