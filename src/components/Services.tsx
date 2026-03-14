@@ -51,7 +51,7 @@ const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 } // Mais rápido para não cansar o user
+    transition: { staggerChildren: 0.1 } 
   }
 };
 
@@ -66,8 +66,10 @@ const cardVariants: Variants = {
 
 const ServiceCard = ({ service }: { service: typeof services[0] }) => {
   const ref = useRef(null);
-  // Margin maior para o vídeo carregar antes de entrar em cena
-  const isInView = useInView(ref, { once: true, margin: "200px" });
+  
+  // Lazy Loading Agressivo: Só monta o vídeo quando está próximo da tela
+  // once: false permite que o browser limpe a memória do vídeo ao sair da seção
+  const isInView = useInView(ref, { once: false, margin: "0px 0px 400px 0px" });
 
   return (
     <motion.a
@@ -76,20 +78,24 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
       href={service.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative block overflow-hidden p-8 md:p-10 border border-white/5 bg-[#1E1A16] min-h-[350px] flex flex-col justify-end transition-all duration-300"
+      className="group relative block overflow-hidden p-8 md:p-10 border border-white/5 bg-[#1E1A16] min-h-[350px] flex flex-col justify-end transition-all duration-300 will-change-transform"
     >
-      {/* VÍDEO OTIMIZADO - Removido Grayscale e Scale que pesavam no hover */}
-      {isInView && (
+      {/* VÍDEO OTIMIZADO - Renderização condicional para poupar CPU */}
+      {isInView ? (
         <video
-          autoPlay loop muted playsInline
-          preload="none"
-          className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none"
         >
           <source src={service.video} type="video/webm" />
         </video>
+      ) : (
+        <div className="absolute inset-0 bg-[#1A1612]" />
       )}
 
-      {/* Overlay Sólido (Mais leve que Backdrop-blur) */}
+      {/* Overlay Sólido de Luxo */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#1A1612] via-[#1A1612]/60 to-transparent z-10" />
 
       <div className="relative z-20">
@@ -130,6 +136,7 @@ const Services = () => {
           <h2 className="font-display text-4xl md:text-6xl font-light text-white">
             Nossos <span className="text-gold-gradient">Serviços</span>
           </h2>
+          <div className="w-20 h-[1px] bg-gold/30 mx-auto mt-6" />
         </motion.div>
 
         <motion.div 
