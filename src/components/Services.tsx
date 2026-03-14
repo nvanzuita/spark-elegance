@@ -82,6 +82,7 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
       {isInView && (
         <video
           autoPlay loop muted playsInline
+          preload="none"
           className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500"
         >
           <source src={service.video} type="video/webm" />
