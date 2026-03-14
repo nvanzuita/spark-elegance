@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { useHref } from "react-router-dom";
 
 const services = [
   {
@@ -9,42 +8,43 @@ const services = [
     description: "Técnicas avançadas de alongamento para realçar o seu olhar com volume e naturalidade.",
     icon: "✦",
     href: "/pdf/catalogocilios.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508783/pestanas_i4nnur.webm", // Nome do vídeo na pasta public
+    // Adicionado f_auto,q_auto logo após /upload/
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/f_auto,q_auto/v1773508783/pestanas_i4nnur.webm", 
   },
   {
     title: "Lash Lifting",
     description: "Curvatura e hidratação dos fios naturais para um efeito de rímel duradouro e sofisticado.",
     icon: "✦",
     href: "/pdf/catalogolifting.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508785/lifting_g24hbt.webm",
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/f_auto,q_auto/v1773508785/lifting_g24hbt.webm",
   },
   {
     title: "Sobrancelhas / Brows",
     description: "Design personalizado e micropigmentação para harmonizar as linhas do seu rosto.",
     icon: "✦",
     href: "/pdf/catalogobrow.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508781/browlami_uwliq6.webm",
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/f_auto,q_auto/v1773508781/browlami_uwliq6.webm",
   },
   {
     title: "Depilação a Laser",
     description: "Tecnologia de ponta para uma remoção definitiva e indolor dos pelos indesejados.",
     icon: "✦",
     href: "/pdf/catalogobody.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508782/depilacao_drvedo.webm",
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/f_auto,q_auto/v1773508782/depilacao_drvedo.webm",
   },
   {
     title: "Estética Facial",
     description: "Protocolos exclusivos de rejuvenescimento e cuidados profundos para a saúde da sua pele.",
     icon: "✦",
     href: "/pdf/catalogofacial.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508782/facial_rvq2il.webm",
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/f_auto,q_auto/v1773508782/facial_rvq2il.webm",
   },
   {
     title: "Tattoo Removal",
     description: "Remoção segura e eficaz de pigmentos com tecnologia laser de última geração.",
     icon: "✦",
     href: "/pdf/catalogotattoo.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508792/tattoo.webm",
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/f_auto,q_auto/v1773508792/tattoo_kvon7f.webm",
   },
 ];
 
@@ -63,22 +63,25 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="group relative block overflow-hidden p-8 md:p-10 border border-border transition-all duration-500 luxury-shadow min-h-[320px] flex flex-col justify-end"
     >
-      {/* 1. Camada do Vídeo */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-      >
-        <source src={service.video} type="video/webm" />
-      </video>
+      {/* Camada do Vídeo Otimizada com Fallback para Safari */}
+      {isInView && (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        >
+          {/* O f_auto entrega WebM para Chrome e MP4 para Safari automaticamente */}
+          <source src={service.video} type="video/webm" />
+          <source src={service.video.replace('.webm', '.mp4')} type="video/mp4" />
+        </video>
+      )}
 
-      {/* 2. Camada de Película (Overlay Marrom 70%) */}
-      {/* Nota: Usando bg-charcoal/70 que definimos no seu CSS para manter o tom marrom escuro */}
+      {/* Película Protetora */}
       <div className="absolute inset-0 bg-[#2A241E]/75 transition-opacity duration-500 group-hover:bg-[#2A241E]/60 z-10" />
 
-      {/* 3. Conteúdo (Texto e Ícone) */}
+      {/* Conteúdo */}
       <div className="relative z-20">
         <span className="text-primary text-2xl mb-4 block group-hover:scale-110 transition-transform duration-300">
             {service.icon}
@@ -92,7 +95,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
         
         <div className="flex items-center gap-2 text-xs tracking-luxury uppercase text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
           <span>Ver Catálogo</span>
-          <span className="group-hover:translate-x-1 transition-transform">→</span>
+          <span>→</span>
         </div>
       </div>
     </motion.a>

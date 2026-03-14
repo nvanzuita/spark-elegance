@@ -6,25 +6,25 @@ const mentorias = [
     title: "Lash Design — Zero a Referência", 
     description: "Formação completa para dominar a arte das pestanas e se tornar referência no mercado premium.", 
     href: "/pdf/mentoria-lashdesigner.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/mentoria4.webm" 
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508786/mentoria4_riaavg.webm" 
   },
   { 
     title: "Brow Lamination", 
     description: "Domine a técnica de laminação de sobrancelhas com acabamento impecável.", 
     href: "/pdf/mentoria-brow.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/mentoria1.webm" 
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508782/mentoria1_iomni6.webm" 
   },
   { 
     title: "HydraLips", 
     description: "Aprenda a técnica de hidratação labial premium com resultados duradouros.", 
     href: "/pdf/mentoria-hydralips.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/mentoria3.webm" 
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508784/mentoria3_jid8ji.webm" 
   },
   { 
     title: "Depilação a Laser", 
     description: "Formação prática e teórica em tecnologia laser de última geração.", 
     href: "/pdf/mentoria-laser.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/mentoria2.webm" 
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508788/mentoria2_kw96nf.webm" 
   },
 ];
 
