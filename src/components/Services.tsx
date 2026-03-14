@@ -9,42 +9,42 @@ const services = [
     description: "Técnicas avançadas de alongamento para realçar o seu olhar com volume e naturalidade.",
     icon: "✦",
     href: "/pdf/catalogocilios.pdf",
-    video: "/video/pestanas.webm", // Nome do vídeo na pasta public
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508783/pestanas_i4nnur.webm", // Nome do vídeo na pasta public
   },
   {
     title: "Lash Lifting",
     description: "Curvatura e hidratação dos fios naturais para um efeito de rímel duradouro e sofisticado.",
     icon: "✦",
     href: "/pdf/catalogolifting.pdf",
-    video: "/video/lifting.webm",
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508785/lifting_g24hbt.webm",
   },
   {
     title: "Sobrancelhas / Brows",
     description: "Design personalizado e micropigmentação para harmonizar as linhas do seu rosto.",
     icon: "✦",
     href: "/pdf/catalogobrow.pdf",
-    video: "/video/browlami.webm",
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508781/browlami_uwliq6.webm",
   },
   {
     title: "Depilação a Laser",
     description: "Tecnologia de ponta para uma remoção definitiva e indolor dos pelos indesejados.",
     icon: "✦",
     href: "/pdf/catalogobody.pdf",
-    video: "/video/depilacao.webm",
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508782/depilacao_drvedo.webm",
   },
   {
     title: "Estética Facial",
     description: "Protocolos exclusivos de rejuvenescimento e cuidados profundos para a saúde da sua pele.",
     icon: "✦",
     href: "/pdf/catalogofacial.pdf",
-    video: "/video/facial.webm",
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508782/facial_rvq2il.webm",
   },
   {
     title: "Tattoo Removal",
     description: "Remoção segura e eficaz de pigmentos com tecnologia laser de última geração.",
     icon: "✦",
     href: "/pdf/catalogotattoo.pdf",
-    video: "/video/tattoo.webm",
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508792/tattoo.webm",
   },
 ];
 
