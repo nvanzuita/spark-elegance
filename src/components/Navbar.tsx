@@ -40,7 +40,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between px-6 lg:px-12">
         <a href="#" className="group flex flex-col">
           <span className="font-display text-xl md:text-2xl tracking-[0.3em] text-white">
-            BRUNA <span className="text-gold-gradient italic">BEAUTY</span>
+            BRUNA <span className="text-gold-gradient">BEAUTY</span>
           </span>
           <span className="text-[8px] tracking-[0.5em] uppercase text-gold/60 -mt-1 group-hover:text-gold transition-colors">
             Estética Avançada
