@@ -1,6 +1,10 @@
 import { motion, Variants, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { AdvancedVideo } from '@cloudinary/react';
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { auto } from "@cloudinary/url-gen/qualifiers/quality";
+import { cld } from "@/hooks/Cloudinary"; // ajuste o caminho correto
 
 const services = [
   {
@@ -8,42 +12,42 @@ const services = [
     description: "Técnicas avançadas de alongamento para realçar o seu olhar com volume e naturalidade.",
     icon: "✦",
     href: "/pdf/catalogocilios.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/vc_auto,q_auto:eco,br_1m/v1773508783/pestanas_i4nnur.webm", 
+    publicId: "pestanas_i4nnur", // extraído da URL original
   },
   {
     title: "Lash Lifting",
     description: "Curvatura e hidratação dos fios naturais para um efeito de rímel duradouro e sofisticado.",
     icon: "✦",
     href: "/pdf/catalogolifting.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/vc_auto,q_auto:eco,br_1m/v1773508785/lifting_g24hbt.webm",
+    publicId: "lifting_g24hbt",
   },
   {
     title: "Sobrancelhas / Brows",
     description: "Design personalizado e micropigmentação para harmonizar as linhas do seu rosto.",
     icon: "✦",
     href: "/pdf/catalogobrow.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/vc_auto,q_auto:eco,br_1m/v1773508781/browlami_uwliq6.webm",
+    publicId: "browlami_uwliq6",
   },
   {
     title: "Depilação a Laser",
     description: "Tecnologia de ponta para uma remoção definitiva e indolor dos pelos indesejados.",
     icon: "✦",
     href: "/pdf/catalogobody.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/vc_auto,q_auto:eco,br_1m/v1773508782/depilacao_drvedo.webm",
+    publicId: "depilacao_drvedo",
   },
   {
     title: "Estética Facial",
     description: "Protocolos exclusivos de rejuvenescimento e cuidados profundos para a saúde da sua pele.",
     icon: "✦",
     href: "/pdf/catalogofacial.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/vc_auto,q_auto:eco,br_1m/v1773508782/facial_rvq2il.webm",
+    publicId: "facial_rvq2il",
   },
   {
     title: "Tattoo Removal",
     description: "Remoção segura e eficaz de pigmentos com tecnologia laser de última geração.",
     icon: "✦",
     href: "/pdf/catalogotattoo.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/vc_auto,q_auto:eco,br_1m/v1773508792/tattoo_kvon7f.webm",
+    publicId: "tattoo_kvon7f",
   },
 ];
 
@@ -51,51 +55,77 @@ const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 } 
-  }
+    transition: { staggerChildren: 0.1 },
+  },
 };
 
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.5, ease: "easeOut" } 
-  }
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
 };
 
 const ServiceCard = ({ service }: { service: typeof services[0] }) => {
-  const ref = useRef(null);
-  
-  // Lazy Loading Agressivo: Só monta o vídeo quando está próximo da tela
-  // once: false permite que o browser limpe a memória do vídeo ao sair da seção
-  const isInView = useInView(ref, { once: false, margin: "0px 0px 400px 0px" });
+  const cardRef = useRef<HTMLAnchorElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const isInView = useInView(cardRef, {
+    once: false, // permite recarregar/pausar múltiplas vezes
+    margin: "0px 0px 300px 0px", // carrega um pouco antes (ajustável)
+  });
+
+  // Controle de play/pause baseado em visibilidade
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    if (isInView) {
+      videoRef.current.play().catch(() => {}); // catch silencioso (políticas mobile)
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isInView]);
+
+  // Config do vídeo otimizado
+  const videoAsset = cld
+    .video(service.publicId)
+    .resize(fill().width(800).height(600).gravity("auto")) // ideal para cards
+    .quality(auto()) // auto:eco se quiser ainda mais leve
+    .format("auto");
+
+  // Poster automático (Cloudinary pega frame inicial)
+  const posterUrl = cld.video(service.publicId).format("auto").toURL();
 
   return (
     <motion.a
-      ref={ref}
+      ref={cardRef} 
       variants={cardVariants}
       href={service.href}
       target="_blank"
       rel="noopener noreferrer"
       className="group relative block overflow-hidden p-8 md:p-10 border border-white/5 bg-[#1E1A16] min-h-[350px] flex flex-col justify-end transition-all duration-300 will-change-transform"
+      onMouseEnter={() => videoRef.current?.play()}
+      onMouseLeave={() => videoRef.current?.pause()}
     >
-      {/* VÍDEO OTIMIZADO - Renderização condicional para poupar CPU */}
       {isInView ? (
-        <video
-          autoPlay
+        <AdvancedVideo
+          ref={videoRef as any} // ref funciona direto no AdvancedVideo (acessa <video> interno)
+          cldVid={videoAsset}
           loop
           muted
           playsInline
+          preload="none" // crucial para lazy real
+          poster={posterUrl}
           className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none"
-        >
-          <source src={service.video} type="video/webm" />
-        </video>
+          controls={false}
+        />
       ) : (
-        <div className="absolute inset-0 bg-[#1A1612]" />
+        <div className="absolute inset-0 bg-[#1A1612]" /> // placeholder simples
       )}
 
-      {/* Overlay Sólido de Luxo */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#1A1612] via-[#1A1612]/60 to-transparent z-10" />
 
       <div className="relative z-20">
@@ -108,7 +138,7 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
         <p className="font-body text-sm text-white/60 leading-relaxed mb-6 line-clamp-2">
           {service.description}
         </p>
-        
+
         <div className="flex items-center gap-2 text-[10px] tracking-widest uppercase text-gold font-bold">
           <span>Ver Detalhes</span>
           <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -132,14 +162,16 @@ const Services = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="font-body text-[10px] tracking-[0.4em] uppercase text-primary mb-4 font-bold">The Experience</p>
+          <p className="font-body text-[10px] tracking-[0.4em] uppercase text-primary mb-4 font-bold">
+            The Experience
+          </p>
           <h2 className="font-display text-4xl md:text-6xl font-light text-white">
             Nossos <span className="text-gold-gradient">Serviços</span>
           </h2>
           <div className="w-20 h-[1px] bg-gold/30 mx-auto mt-6" />
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

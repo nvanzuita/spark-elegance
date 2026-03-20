@@ -1,28 +1,47 @@
 import { motion } from "framer-motion";
+import { AdvancedVideo } from '@cloudinary/react';
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { auto } from "@cloudinary/url-gen/qualifiers/quality"; // ou eco/good conforme teste
+import { cld } from "@/hooks/Cloudinary"; // ajuste o path pro seu cld
 
 const Hero = () => {
+  // Config do vídeo (faça fora do componente se quiser memoizar)
+  const heroVideo = cld
+    .video("background_xzpxyl")                    // public_id sem extensão
+    .resize(fill().width(1920).height(1080).gravity("auto")) // gravity auto pra crop inteligente
+    .quality(auto())                               // auto:good ou auto:eco — teste no Lighthouse
+    .format("auto");                               // entrega o melhor formato pro browser
+
+  // Poster: use um frame do vídeo ou imagem estática
+  // Opção 1: auto (Cloudinary pega o melhor frame)
+  const posterUrl = cld
+    .video("background_xzpxyl")
+    .quality("auto")
+    .format("auto")
+    .toURL(); // ou defina manual: cld.image("poster-hero").toURL()
+
   return (
     <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-[#1A1612]">
-      {/* Background Video Container - REMOVIDO PARALLAX PARA PERFORMANCE */}
+      {/* Background Video Container */}
       <div className="absolute inset-0 z-0">
-        <video
+        <AdvancedVideo
+          cldVid={heroVideo}
           autoPlay
           loop
           muted
           playsInline
+          preload="metadata"          // mantém bom
+          poster={posterUrl}          // agora com URL gerada
           className="w-full h-full object-cover"
-        >
-          {/* Removi os parâmetros auto e quality do Cloudinary para testar a entrega direta se o vídeo já estiver otimizado */}
-          <source src="https://res.cloudinary.com/dudnl5whz/video/upload/v1773509327/background_xzpxyl.webm" type="video/webm" />
-        </video>
-        
-        {/* Overlay PRO: Removido o BACKDROP-BLUR que é o maior vilão da performance */}
+          // Opcional: controls={false} se quiser esconder barra
+        />
+
+        {/* Overlay suave – sem blur pesado */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#1A1612]/70 via-[#1A1612]/50 to-[#1A1612] z-[1]" />
       </div>
 
-      {/* Content */}
+      {/* Content – igual ao seu, sem mudança */}
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        {/* Logo Animation - Simplificada */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -30,12 +49,11 @@ const Hero = () => {
           className="mb-10"
         >
           <div className="relative w-28 h-28 md:w-36 md:h-36 mx-auto flex items-center justify-center">
-            {/* Glow Aura - Mantida, mas sem o blur-3xl exagerado */}
             <div className="absolute inset-0 bg-gold/10 blur-2xl rounded-full" />
             <div className="relative w-full h-full rounded-full border border-gold/20 p-6 flex items-center justify-center bg-black/20">
-              <img 
-                src="/simbolo1.PNG" 
-                alt="Logo Bruna Beauty" 
+              <img
+                src="/simbolo1.PNG"
+                alt="Logo Bruna Beauty"
                 className="w-full h-full object-contain brightness-110"
               />
             </div>
@@ -59,7 +77,7 @@ const Hero = () => {
         >
           Luxury Aesthetic
           <br />
-          <span className="text-gold-gradient">Experience</span> {/* Removido o italic conforme pedido anteriormente */}
+          <span className="text-gold-gradient">Experience</span>
         </motion.h1>
 
         <motion.div
@@ -78,7 +96,6 @@ const Hero = () => {
           Onde a beleza encontra a excelência. Técnicas avançadas e ambiente sofisticado para resultados que transformam.
         </motion.p>
 
-        {/* BOTOES RECUPERADOS: Dourado Sólido e Texto Preto (O que você gostava) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -91,7 +108,7 @@ const Hero = () => {
           >
             Explorar Serviços
           </a>
-          
+
           <a
             href="https://wa.me/+351931920081"
             target="_blank"
@@ -103,7 +120,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator - Mantido, é leve */}
+      {/* Scroll Indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
         <span className="text-[8px] uppercase tracking-[0.4em] text-gold/50 font-bold">Scroll</span>
         <div className="w-[1px] h-10 bg-gradient-to-b from-gold to-transparent" />
