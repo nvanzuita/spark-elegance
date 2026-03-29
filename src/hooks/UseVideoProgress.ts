@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
-import { db, auth } from "../firebase";
+import { db, auth } from "../academy/firebase";
 
 interface UseVideoProgressProps {
   videoId: string;           // id do documento no Firestore
