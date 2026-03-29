@@ -7,15 +7,15 @@ import { HelmetProvider } from "react-helmet-async";
 import { useEffect } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import Login from "./pages/Login";
-import DashboardAluna from "./pages/DashboardAluna";
-import VideoPlayer from "./pages/VideoPlayer";
-import PrivateRoutes from "./components/PrivateRoutes"; 
-import HomeDashboard from "./pages/HomeDashboard";
-import MentoriasAluna from "./components/MentoriasAluna";
-import Materiais from "./components/Materiais";
-import Welcome from "./pages/Welcome";
-import Admin from "./pages/Admin";
+import Login from "./academy/pages/Login";
+import DashboardAluna from "./academy/pages/DashboardAluna";
+import VideoPlayer from "./academy/pages/VideoPlayer";
+import PrivateRoutes from "./academy/components/PrivateRoutes"; 
+import HomeDashboard from "./academy/pages/HomeDashboard";
+import MentoriasAluna from "./academy/components/MentoriasAluna";
+import Materiais from "./academy/components/Materiais";
+import Welcome from "./academy/pages/Welcome";
+import Admin from "./academy/pages/Admin";
 
 const queryClient = new QueryClient();
 
