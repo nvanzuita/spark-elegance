@@ -105,7 +105,7 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
       href={service.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative block overflow-hidden p-8 md:p-10 border border-white/5 bg-[#1E1A16] min-h-[350px] flex flex-col justify-end transition-all duration-300 will-change-transform"
+      className="group relative block overflow-hidden p-8 md:p-10 border border-white/5 bg-[#1E1A16] min-h-[350px] flex-col justify-end transition-all duration-300 will-change-transform"
       onMouseEnter={() => videoRef.current?.play()}
       onMouseLeave={() => videoRef.current?.pause()}
     >
