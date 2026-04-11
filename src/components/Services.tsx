@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { AdvancedVideo } from '@cloudinary/react';
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { auto } from "@cloudinary/url-gen/qualifiers/quality";
-import { cld } from "@/hooks/Cloudinary"; // ajuste o caminho correto
+import { cld } from "@/hooks/Cloudinary"; 
 
 const services = [
   {
@@ -12,7 +12,7 @@ const services = [
     description: "Técnicas avançadas de alongamento para realçar o seu olhar com volume e naturalidade.",
     icon: "✦",
     href: "/pdf/catalogocilios.pdf",
-    publicId: "pestanas_i4nnur", // extraído da URL original
+    publicId: "pestanas_i4nnur",
   },
   {
     title: "Lash Lifting",
@@ -70,32 +70,45 @@ const cardVariants: Variants = {
 
 const ServiceCard = ({ service }: { service: typeof services[0] }) => {
   const cardRef = useRef<HTMLAnchorElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  // Alteração: Tipagem correta para o componente do Cloudinary
+  const videoRef = useRef<any>(null);
 
   const isInView = useInView(cardRef, {
-    once: false, // permite recarregar/pausar múltiplas vezes
-    margin: "0px 0px 300px 0px", // carrega um pouco antes (ajustável)
+    once: false,
+    margin: "0px 0px 300px 0px",
   });
 
-  // Controle de play/pause baseado em visibilidade
-  useEffect(() => {
-    if (!videoRef.current) return;
+  // Função segura para dar play
+  const safePlay = () => {
+    // O AdvancedVideo guarda o elemento real em .videoElement
+    const video = videoRef.current?.videoElement;
+    if (video && typeof video.play === 'function') {
+      video.play().catch(() => {});
+    }
+  };
 
+  // Função segura para dar pause
+  const safePause = () => {
+    const video = videoRef.current?.videoElement;
+    if (video && typeof video.pause === 'function') {
+      video.pause();
+    }
+  };
+
+  useEffect(() => {
     if (isInView) {
-      videoRef.current.play().catch(() => {}); // catch silencioso (políticas mobile)
+      safePlay();
     } else {
-      videoRef.current.pause();
+      safePause();
     }
   }, [isInView]);
 
-  // Config do vídeo otimizado
   const videoAsset = cld
     .video(service.publicId)
-    .resize(fill().width(800).height(600).gravity("auto")) // ideal para cards
-    .quality(auto()) // auto:eco se quiser ainda mais leve
+    .resize(fill().width(800).height(600).gravity("auto"))
+    .quality(auto())
     .format("auto");
 
-  // Poster automático (Cloudinary pega frame inicial)
   const posterUrl = cld.video(service.publicId).format("auto").toURL();
 
   return (
@@ -105,27 +118,27 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
       href={service.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative block overflow-hidden p-8 md:p-10 border border-white/5 bg-[#1E1A16] min-h-[350px] flex-col justify-end transition-all duration-300 will-change-transform"
-      onMouseEnter={() => videoRef.current?.play()}
-      onMouseLeave={() => videoRef.current?.pause()}
+      className="group relative overflow-hidden p-8 md:p-10 border border-white/5 bg-[#1E1A16] min-h-[350px] flex flex-col justify-end transition-all duration-300 will-change-transform"
+      onMouseEnter={safePlay}
+      onMouseLeave={safePause}
     >
       {isInView ? (
         <AdvancedVideo
-          ref={videoRef as any} // ref funciona direto no AdvancedVideo (acessa <video> interno)
+          ref={videoRef}
           cldVid={videoAsset}
           loop
           muted
           playsInline
-          preload="none" // crucial para lazy real
+          autoPlay // Adicionado para garantir o play inicial
+          preload="auto"
           poster={posterUrl}
           className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none"
           controls={false}
         />
       ) : (
-        <div className="absolute inset-0 bg-[#1A1612]" /> // placeholder simples
+        <div className="absolute inset-0 bg-[#1A1612]" />
       )}
 
-      {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#1A1612] via-[#1A1612]/60 to-transparent z-10" />
 
       <div className="relative z-20">
