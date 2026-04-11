@@ -57,27 +57,38 @@ const Navbar = () => {
                 className="relative font-body text-[10px] tracking-[0.2em] uppercase text-white/70 hover:text-white transition-colors duration-300 group"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:width-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
+            {/* NOVO BOTÃO BRUNA BEAUTY ACADEMY COM EFEITO GLOW */}
+            <a
+              href="https://academy.brunabeauty.eu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group inline-flex items-center justify-center transition-all duration-300"
+            >
+              {/* Brilho de fundo (Glow) */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 to-yellow-700 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-500"></div>
+              
+              {/* Corpo do botão */}
+              <div className="relative px-4 py-2 bg-black border border-gold/40 rounded-sm flex items-center gap-2">
+                <span className="text-[9px] tracking-[0.2em] font-bold text-white uppercase whitespace-nowrap">
+                  Bruna Beauty Academy
+                </span>
+                <span className="text-[10px] animate-pulse">✨</span>
+              </div>
+            </a>
+
             <a
               href="https://wa.me/+351931920081"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2.5 bg-gold-gradient text-[10px] tracking-widest uppercase text-black font-bold hover:scale-105 transition-transform duration-300"
+              className="px-6 py-2.5 bg-gold-gradient text-[10px] tracking-widest uppercase text-black font-bold hover:scale-105 transition-transform duration-300 shadow-lg shadow-gold/10"
             >
               Reservar
-            </a>
-            <a
-              href="https://www.fresha.com/..."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-2.5 border border-gold/30 text-[10px] tracking-widest uppercase text-white hover:bg-gold/10 transition-all"
-            >
-              Booking Online
             </a>
           </div>
         </div>
@@ -101,6 +112,19 @@ const Navbar = () => {
             className="fixed inset-0 top-[60px] h-screen bg-[#1A1612] z-40 md:hidden px-6 py-12"
           >
             <div className="flex flex-col gap-8">
+              {/* DESTAQUE ACADEMY NO MOBILE */}
+              <a
+                href="https://academy.brunabeauty.eu"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileOpen(false)}
+                className="w-full py-5 bg-black border border-gold/50 rounded-lg text-center relative overflow-hidden group shadow-[0_0_20px_rgba(212,175,55,0.1)]"
+              >
+                <span className="relative font-display text-xl tracking-widest text-gold uppercase">
+                  Academy ✨
+                </span>
+              </a>
+
               {navLinks.map((link, i) => (
                 <motion.a
                   initial={{ opacity: 0, x: 20 }}
@@ -114,11 +138,12 @@ const Navbar = () => {
                   {link.label}
                 </motion.a>
               ))}
+              
               <a
-                href="https://wa.me/..."
-                className="mt-4 w-full py-5 bg-gold-gradient text-center text-black font-bold tracking-widest uppercase"
+                href="https://wa.me/+351931920081"
+                className="mt-4 w-full py-5 bg-gold-gradient text-center text-black font-bold tracking-widest uppercase shadow-xl"
               >
-                Agendar Agora
+                Reservar Agora
               </a>
             </div>
           </motion.div>
