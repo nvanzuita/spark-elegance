@@ -18,4 +18,19 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Code-splitting: separa as bibliotecas grandes em ficheiros próprios.
+    // Ganhos: (1) o browser descarrega várias peças em paralelo; (2) estas
+    // bibliotecas mudam raramente, por isso ficam em cache entre visitas.
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "react-vendor": ["react", "react-dom", "react-router-dom"],
+          motion: ["framer-motion"],
+          cloudinary: ["@cloudinary/react", "@cloudinary/url-gen"],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 700,
+  },
 }));

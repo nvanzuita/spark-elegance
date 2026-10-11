@@ -60,6 +60,11 @@ const About = () => {
     key={currentIndex}
     src={images[currentIndex]}
     alt="Bruna Rodrigues"
+    // Só a primeira imagem carrega de imediato; as restantes em lazy para não
+    // bloquear o carregamento inicial (as fotos do carrossel são pesadas).
+    loading={currentIndex === 0 ? "eager" : "lazy"}
+    decoding="async"
+    fetchPriority={currentIndex === 0 ? "high" : "auto"}
     // Começa fora da tela à direita (x: 100%) e invisível
     initial={{ opacity: 0, x: 20 }} 
     // Desliza para a posição original (x: 0) e fica visível

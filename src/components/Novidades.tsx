@@ -65,7 +65,7 @@ const Novidades = () => {
               preload="metadata"
               poster={posterUrl}
               aria-label={t.novidades.videoAlt}
-              className="w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
+              className="w-full h-full object-cover transition-transform duration-1200 ease-out group-hover:scale-[1.04]"
             />
 
             {/* Película: mais escura por base (para o texto em toque); no desktop clareia e escurece no hover */}
