@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
+import { useRef, useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { whatsappLink } from "@/lib/siteConfig";
 
@@ -16,6 +16,8 @@ const Novidades = () => {
   const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  // Mobile: controla o mini-carrossel vídeo ↔ texto (sem hover em ecrãs de toque).
+  const [showText, setShowText] = useState(false);
 
   return (
     <section id="novidades" className="py-24 md:py-32 px-6 bg-background">
@@ -37,17 +39,14 @@ const Novidades = () => {
           <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent mx-auto" />
         </motion.div>
 
-        {/* ============ MOBILE: card interativo (hover/swipe revela o texto) — só mobile ============ */}
-        {/* Vídeo em proporção natural (w-full h-auto), sem forçar altura. Vídeo sai e o texto entra, sem título repetido. */}
-        <motion.a
-          href={whatsappLink()}
-          target="_blank"
-          rel="noopener noreferrer"
+        {/* ============ MOBILE: mini-carrossel vídeo ↔ texto com setas (sem hover) ============ */}
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="group relative block md:hidden overflow-hidden border border-gold/40 luxury-shadow bg-[#1A1612]"
+          className="md:hidden relative overflow-hidden border border-gold/40 luxury-shadow bg-[#1A1612]"
         >
+          {/* Vídeo — mantém proporção natural; sai quando o texto entra */}
           <video
             autoPlay
             loop
@@ -56,13 +55,21 @@ const Novidades = () => {
             preload="metadata"
             poster={NOVIDADES_POSTER_URL}
             aria-label={t.novidades.videoAlt}
-            className="block w-full h-auto transition-opacity duration-500 ease-out group-hover:opacity-0"
+            className={
+              "block w-full h-auto transition-all duration-500 ease-out " +
+              (showText ? "opacity-0 scale-105" : "opacity-100")
+            }
           >
             <source src={NOVIDADES_VIDEO_URL} type="video/mp4" />
           </video>
 
-          {/* Fundo escuro — aparece quando o vídeo sai (hover/swipe) */}
-          <div className="absolute inset-0 bg-[#1A1612] opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
+          {/* Fundo escuro — aparece com o texto para dar contraste */}
+          <div
+            className={
+              "absolute inset-0 bg-[#1A1612] transition-opacity duration-500 ease-out " +
+              (showText ? "opacity-100" : "opacity-0 pointer-events-none")
+            }
+          />
 
           {/* Badge */}
           <span className="absolute top-4 right-4 z-20 inline-flex items-center gap-2 border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm px-3 py-1.5 font-body text-[10px] tracking-[0.25em] uppercase text-gold font-medium">
@@ -70,28 +77,60 @@ const Novidades = () => {
             {t.novidades.badge}
           </span>
 
-          {/* Texto — entra no hover/swipe, SEM título aqui (título só no cabeçalho da secção) */}
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-10 opacity-0 translate-y-4 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+          {/* Texto — entra por cima do vídeo; SEM título (só no cabeçalho da secção) */}
+          <div
+            className={
+              "absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-10 transition-all duration-500 ease-out " +
+              (showText ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none")
+            }
+          >
             <p className="font-body text-[10px] tracking-[0.4em] uppercase text-gold/80 mb-4 font-bold">
               {t.novidades.eyebrow}
             </p>
             <p className="font-elegant text-base text-white/85 leading-relaxed italic mb-8 max-w-sm">
               {t.novidades.description}
             </p>
-            <span className="inline-flex items-center gap-2 font-body text-[11px] tracking-luxury uppercase text-gold font-bold">
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-body text-[11px] tracking-luxury uppercase text-gold font-bold"
+              onClick={(e) => e.stopPropagation()}
+            >
               {t.novidades.cta}
               <ArrowRight size={14} />
-            </span>
+            </a>
           </div>
 
-          {/* Hint — visível por padrão, some no hover/swipe */}
-          <div className="absolute inset-x-0 bottom-8 z-20 flex justify-center transition-all duration-300 group-hover:opacity-0 group-hover:translate-y-2">
-            <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm px-4 py-2 font-body text-[10px] tracking-[0.25em] uppercase text-gold font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" aria-hidden="true" />
-              {t.novidades.hoverHint}
-            </span>
+          {/* Setas de navegação do carrossel */}
+          <div className="absolute inset-x-0 bottom-6 z-20 flex items-center justify-center gap-4">
+            {/* Voltar ao vídeo — só visível quando o texto está ativo */}
+            <button
+              type="button"
+              aria-label={t.novidades.hoverHint}
+              onClick={() => setShowText(false)}
+              className={
+                "inline-flex items-center justify-center w-11 h-11 rounded-full border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm text-gold transition-all duration-300 " +
+                (showText ? "opacity-100" : "opacity-0 pointer-events-none")
+              }
+            >
+              <ArrowLeft size={18} />
+            </button>
+
+            {/* Ir para o texto — só visível quando o vídeo está ativo */}
+            <button
+              type="button"
+              aria-label={t.novidades.hoverHint}
+              onClick={() => setShowText(true)}
+              className={
+                "inline-flex items-center justify-center w-11 h-11 rounded-full border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm text-gold transition-all duration-300 " +
+                (showText ? "opacity-0 pointer-events-none" : "opacity-100")
+              }
+            >
+              <ArrowRight size={18} />
+            </button>
           </div>
-        </motion.a>
+        </motion.div>
 
         {/* ============ DESKTOP: grid 2 colunas (vídeo esquerda / texto direita) — só md+ ============ */}
         <motion.a
