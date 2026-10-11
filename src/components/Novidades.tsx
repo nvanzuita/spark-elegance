@@ -102,34 +102,33 @@ const Novidades = () => {
             </a>
           </div>
 
-          {/* Setas de navegação do carrossel */}
-          <div className="absolute inset-x-0 bottom-6 z-20 flex items-center justify-center gap-4">
-            {/* Voltar ao vídeo — só visível quando o texto está ativo */}
-            <button
-              type="button"
-              aria-label={t.novidades.hoverHint}
-              onClick={() => setShowText(false)}
-              className={
-                "inline-flex items-center justify-center w-11 h-11 rounded-full border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm text-gold transition-all duration-300 " +
-                (showText ? "opacity-100" : "opacity-0 pointer-events-none")
-              }
-            >
-              <ArrowLeft size={18} />
-            </button>
+          {/* Setas de navegação — laterais, centradas na vertical.
+              Vídeo ativo → → na direita; Texto ativo → ← na esquerda. */}
+          {/* Voltar ao vídeo (←) — lateral esquerda, só quando o texto está ativo */}
+          <button
+            type="button"
+            aria-label={t.novidades.hoverHint}
+            onClick={() => setShowText(false)}
+            className={
+              "absolute left-4 top-1/2 -translate-y-1/2 z-20 inline-flex items-center justify-center w-11 h-11 rounded-full border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm text-gold transition-opacity duration-300 " +
+              (showText ? "opacity-100" : "opacity-0 pointer-events-none")
+            }
+          >
+            <ArrowLeft size={18} />
+          </button>
 
-            {/* Ir para o texto — só visível quando o vídeo está ativo */}
-            <button
-              type="button"
-              aria-label={t.novidades.hoverHint}
-              onClick={() => setShowText(true)}
-              className={
-                "inline-flex items-center justify-center w-11 h-11 rounded-full border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm text-gold transition-all duration-300 " +
-                (showText ? "opacity-0 pointer-events-none" : "opacity-100")
-              }
-            >
-              <ArrowRight size={18} />
-            </button>
-          </div>
+          {/* Ir para o texto (→) — lateral direita, só quando o vídeo está ativo */}
+          <button
+            type="button"
+            aria-label={t.novidades.hoverHint}
+            onClick={() => setShowText(true)}
+            className={
+              "absolute right-4 top-1/2 -translate-y-1/2 z-20 inline-flex items-center justify-center w-11 h-11 rounded-full border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm text-gold transition-opacity duration-300 " +
+              (showText ? "opacity-0 pointer-events-none" : "opacity-100")
+            }
+          >
+            <ArrowRight size={18} />
+          </button>
         </motion.div>
 
         {/* ============ DESKTOP: grid 2 colunas (vídeo esquerda / texto direita) — só md+ ============ */}
