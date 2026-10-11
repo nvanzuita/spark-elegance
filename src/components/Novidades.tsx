@@ -5,11 +5,8 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { whatsappLink } from "@/lib/siteConfig";
 
 // Secção "Novidades": destaca a Tecnologia Lash LED UV.
-// Vídeo em paisagem (largura total do card, via object-cover).
-// ⚠️ O vídeo atual ainda é o placeholder VERTICAL — quando colocar o vídeo
-// HORIZONTAL definitivo, basta substituir as duas URLs abaixo (ou o public_id).
-// Dica: para vídeos horizontais, pode voltar a adicionar ",w_1400" na URL para
-// limitar a resolução e poupar banda.
+// Layout lado a lado: vídeo vertical à esquerda, texto à direita.
+// Para trocar o vídeo no futuro, basta substituir as duas URLs abaixo.
 const NOVIDADES_VIDEO_URL =
   "https://res.cloudinary.com/dudnl5whz/video/upload/q_auto,f_auto/v1791721856/videolashleduv_ci2qts";
 const NOVIDADES_POSTER_URL =
@@ -40,7 +37,7 @@ const Novidades = () => {
           <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent mx-auto" />
         </motion.div>
 
-        {/* Cartão com moldura dourada; o vídeo ocupa toda a área interior */}
+        {/* Cartão lado a lado: vídeo vertical + texto (sempre visível) */}
         <motion.a
           href={whatsappLink()}
           target="_blank"
@@ -48,11 +45,10 @@ const Novidades = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="group relative block border border-gold/40 luxury-shadow overflow-hidden"
+          className="group grid grid-cols-1 md:grid-cols-2 items-stretch border border-gold/40 luxury-shadow overflow-hidden bg-[#1A1612]"
         >
-          <div className="relative aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-[#1A1612]">
-            {/* Vídeo em paisagem (largura total). object-cover preenche o card.
-                Otimizado com q_auto,f_auto — comprime sem forçar resolução. */}
+          {/* Vídeo vertical (esquerda) */}
+          <div className="relative aspect-[9/16] md:aspect-auto md:min-h-[560px] overflow-hidden">
             <video
               autoPlay
               loop
@@ -61,30 +57,38 @@ const Novidades = () => {
               preload="metadata"
               poster={NOVIDADES_POSTER_URL}
               aria-label={t.novidades.videoAlt}
-              className="w-full h-full object-cover transition-transform duration-1200 ease-out group-hover:scale-[1.03]"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1200 ease-out group-hover:scale-[1.03]"
             >
               <source src={NOVIDADES_VIDEO_URL} type="video/mp4" />
             </video>
 
-            {/* Película: mais escura por base (para o texto em toque); no desktop clareia e escurece no hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1612]/85 via-[#1A1612]/45 to-[#1A1612]/50 transition-all duration-500 md:from-[#1A1612]/50 md:via-transparent md:to-transparent md:group-hover:from-[#1A1612]/90 md:group-hover:via-[#1A1612]/55 md:group-hover:to-[#1A1612]/60" />
+            {/* Película subtil para o badge respirar sobre o vídeo */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1612]/40 via-transparent to-[#1A1612]/30 pointer-events-none" />
 
-            {/* Badge no canto superior direito (sempre visível) */}
+            {/* Badge no canto superior direito do vídeo */}
             <span className="absolute top-4 right-4 z-20 inline-flex items-center gap-2 border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm px-3 py-1.5 font-body text-[10px] tracking-[0.25em] uppercase text-gold font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" aria-hidden="true" />
               {t.novidades.badge}
             </span>
+          </div>
 
-            {/* Conteúdo: em desktop só aparece no hover; em ecrãs de toque fica sempre visível */}
-            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-8 transition-all duration-500 ease-out md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 pointer-events-none">
-              <p className="font-elegant text-base sm:text-lg md:text-xl text-white/90 leading-relaxed italic max-w-2xl mb-7">
-                {t.novidades.description}
-              </p>
-              <span className="inline-flex items-center gap-2 font-body text-[11px] tracking-luxury uppercase text-gold font-bold">
-                {t.novidades.cta}
-                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </span>
-            </div>
+          {/* Texto (direita) */}
+          <div className="flex flex-col items-start justify-center text-left p-8 sm:p-10 md:p-12 lg:p-14">
+            <p className="font-body text-[10px] tracking-[0.4em] uppercase text-gold/80 mb-4 font-bold">
+              {t.novidades.eyebrow}
+            </p>
+            <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-white mb-5 leading-tight">
+              {t.novidades.titleA}{" "}
+              <span className="italic text-gold-gradient">{t.novidades.titleB}</span>
+            </h3>
+            <div className="w-16 h-[1px] bg-gradient-to-r from-gold/60 to-transparent mb-6" />
+            <p className="font-elegant text-base md:text-lg text-white/80 leading-relaxed italic mb-8">
+              {t.novidades.description}
+            </p>
+            <span className="inline-flex items-center gap-2 font-body text-[11px] tracking-luxury uppercase text-gold font-bold group-hover:text-white transition-colors duration-300">
+              {t.novidades.cta}
+              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
           </div>
         </motion.a>
       </div>
