@@ -41,11 +41,14 @@ const FloatingBadge = () => {
             className="group relative flex items-center gap-4 bg-[#2A241E]/90 backdrop-blur-md border border-gold/20 p-2 pr-6 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:border-gold/50 transition-all duration-500"
           >
             {/* Logo Wrapper */}
-            <div className="relative flex items-center justify-center bg-white w-12 h-12 rounded-full border border-gold/20 p-1.5 shrink-0 overflow-hidden">
-              <img 
-                src="/rastelli.webp" 
-                alt="Rastelli Logo" 
-                className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" 
+            <div className="relative flex items-center justify-center bg-white w-14 h-14 rounded-full border border-gold/20 p-2 shrink-0 overflow-hidden">
+              <img
+                src="/rastelli.webp"
+                alt="Rastelli Logo"
+                width={56}
+                height={56}
+                loading="eager"
+                className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
               />
             </div>
 

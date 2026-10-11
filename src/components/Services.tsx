@@ -1,5 +1,5 @@
 import { motion, Variants, useInView } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { AdvancedVideo } from '@cloudinary/react';
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { auto } from "@cloudinary/url-gen/qualifiers/quality";
@@ -40,30 +40,35 @@ const ServiceCard = ({ service }: { service: (typeof services)[number] }) => {
   const { t } = useLanguage();
   const item = t.services.items[service.key];
   const cardRef = useRef<HTMLAnchorElement>(null);
-  // Alteração: Tipagem correta para o componente do Cloudinary
-  const videoRef = useRef<any>(null);
+  // Ref da instância do AdvancedVideo; o elemento <video> real fica em .videoElement.
+  const videoRef = useRef<InstanceType<typeof AdvancedVideo>>(null);
 
   const isInView = useInView(cardRef, {
     once: false,
     margin: "0px 0px 300px 0px",
   });
 
+  // Acede ao elemento <video> real dentro da instância do AdvancedVideo.
+  const getVideo = useCallback(
+    () => (videoRef.current as unknown as { videoElement?: HTMLVideoElement } | null)?.videoElement,
+    []
+  );
+
   // Função segura para dar play
-  const safePlay = () => {
-    // O AdvancedVideo guarda o elemento real em .videoElement
-    const video = videoRef.current?.videoElement;
+  const safePlay = useCallback(() => {
+    const video = getVideo();
     if (video && typeof video.play === 'function') {
       video.play().catch(() => {});
     }
-  };
+  }, [getVideo]);
 
   // Função segura para dar pause
-  const safePause = () => {
-    const video = videoRef.current?.videoElement;
+  const safePause = useCallback(() => {
+    const video = getVideo();
     if (video && typeof video.pause === 'function') {
       video.pause();
     }
-  };
+  }, [getVideo]);
 
   useEffect(() => {
     if (isInView) {
@@ -71,7 +76,7 @@ const ServiceCard = ({ service }: { service: (typeof services)[number] }) => {
     } else {
       safePause();
     }
-  }, [isInView]);
+  }, [isInView, safePlay, safePause]);
 
   const videoAsset = cld
     .video(service.publicId)

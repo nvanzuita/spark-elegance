@@ -66,7 +66,7 @@ const Navbar = () => {
       />
 
       <div className="relative z-50 container mx-auto flex items-center justify-between px-6 lg:px-12">
-        <a href="#" className="group flex flex-col">
+        <a href="/" className="group flex flex-col">
           <span className="font-display text-xl md:text-2xl tracking-[0.3em] text-white">
             BRUNA <span className="text-gold-gradient">BEAUTY</span>
           </span>

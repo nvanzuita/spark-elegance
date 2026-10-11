@@ -1,4 +1,5 @@
 import { Instagram } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { INSTAGRAM_HANDLE, INSTAGRAM_URL, RASTELLI_COUPON, RASTELLI_URL } from "@/lib/siteConfig";
 
@@ -44,6 +45,16 @@ const Footer = () => {
           >
             {t.footer.partnerBefore} <span className="text-primary font-medium">{RASTELLI_COUPON}</span> {t.footer.partnerAfter}
           </a>
+        </div>
+
+        {/* Legal */}
+        <div className="mt-6 text-center">
+          <Link
+            to="/politica-de-privacidade"
+            className="font-body text-xs text-muted-foreground hover:text-primary transition-colors tracking-wider underline underline-offset-4"
+          >
+            {t.footer.privacy}
+          </Link>
         </div>
       </div>
     </footer>

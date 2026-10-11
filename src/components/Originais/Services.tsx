@@ -70,8 +70,8 @@ const cardVariants: Variants = {
 
 const ServiceCard = ({ service }: { service: typeof services[0] }) => {
   const cardRef = useRef<HTMLAnchorElement>(null);
-  // Alteração: Tipagem correta para o componente do Cloudinary
-  const videoRef = useRef<any>(null);
+  // Tipagem mínima do ref do AdvancedVideo: expõe o elemento <video> real em .videoElement
+  const videoRef = useRef<{ videoElement?: HTMLVideoElement } | null>(null);
 
   const isInView = useInView(cardRef, {
     once: false,

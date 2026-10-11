@@ -38,6 +38,16 @@ const pt = {
     scroll: "Scroll",
     logoAlt: "Logo Bruna Beauty",
   },
+  novidades: {
+    eyebrow: "Novidade Exclusiva",
+    titleA: "Tecnologia",
+    titleB: "Lash LED UV",
+    description:
+      "Apresentamos a revolucionária Tecnologia Lash LED UV: uma lâmpada de cura por luz LED UV de alta potência, desenvolvida para secar e fixar adesivos de extensão de pestanas em segundos. Com baixo consumo de energia, aquecimento mínimo e design ergonómico, garante uma aplicação mais rápida, segura e confortável — para si e para a sua profissional. Resultados impecáveis, com máxima durabilidade e total respeito pela saúde dos olhos.",
+    cta: "Saiba Mais",
+    badge: "Novidade",
+    videoAlt: "Vídeo demonstrativo da Tecnologia Lash LED UV",
+  },
   services: {
     eyebrow: "The Experience",
     titleA: "Nossos",
@@ -91,8 +101,8 @@ const pt = {
         description: "Aprenda a técnica de hidratação labial premium com resultados duradouros.",
       },
       laser: {
-        title: "Depilação a Laser",
-        description: "Formação prática e teórica em tecnologia laser de última geração.",
+        title: "Lash LED UV",
+        description: "Domine a Tecnologia Lash LED UV e leve a aplicação de extensões a outro nível de precisão e durabilidade.",
       },
     },
   },
@@ -127,6 +137,18 @@ const pt = {
     online: "Reservar Online",
     waMessage: "Olá Bruna! Vim através do Site, e gostaria de Reservar um Horário! 🤩💜",
   },
+  location: {
+    eyebrow: "Onde Nos Encontrar",
+    titleA: "Visite o",
+    titleB: "Studio",
+    addressLabel: "Endereço",
+    address: "Rua Latino Coelho, Parede, Cascais, Portugal",
+    hoursLabel: "Horário",
+    hoursLines: ["Terça a Sexta • 10h–19h", "Sábado • 10h–17h"],
+    transportLabel: "Como chegar",
+    transport: "Fácil acesso e estacionamento nas proximidades. Estação de comboios de Parede a poucos minutos.",
+    cta: "Ver no Google Maps",
+  },
   reviews: {
     eyebrow: "Feedback das nossas clientes",
     titleA: "Avaliações no",
@@ -136,43 +158,114 @@ const pt = {
     eyebrow: "Esclareça suas dúvidas",
     titleA: "Dúvidas",
     titleB: "Frequentes",
-    items: [
+    groups: [
       {
-        q: "Sobre Pestanas",
-        a: "Trabalhamos com mais de 12 opções de extensões, desde efeitos naturais até aos volumosos, utilizando materiais hipoalergênicos para garantir a saúde dos seus olhos.",
+        title: "Serviços",
+        items: [
+          {
+            q: "Sobre Pestanas",
+            a: "Trabalhamos com mais de 12 opções de extensões, desde efeitos naturais até aos volumosos, utilizando materiais hipoalergênicos para garantir a saúde dos seus olhos.",
+          },
+          {
+            q: "Sobre Limpeza de Pele",
+            a: "Nossa limpeza profunda inclui extração manual e peeling ultrassônico para renovação celular completa.",
+          },
+          {
+            q: "Sobre Hydralips",
+            a: "Um tratamento de hidratação profunda que revitaliza o tecido labial, deixando-os com aspecto saudável e jovem.",
+          },
+          {
+            q: "Sobre Depilação",
+            a: "Utilizamos métodos que minimizam o desconforto, adequados para todos os tipos de pele, incluindo as mais sensíveis.",
+          },
+          {
+            q: "Sobre Remoção de Tatuagem",
+            a: "Realizamos o procedimento com laser de última geração, focado na segurança e eficácia da remoção do pigmento.",
+          },
+        ],
       },
       {
-        q: "Sobre Limpeza de Pele",
-        a: "Nossa limpeza profunda inclui extração manual e peeling ultrassônico para renovação celular completa.",
+        title: "Reservas & Cancelamentos",
+        items: [
+          {
+            q: "Como faço para reservar?",
+            a: "Pode reservar diretamente pelo botão de Booking Online, por WhatsApp ou através da nossa página de reservas. A taxa de reserva é de 15€.",
+          },
+          {
+            q: "Sobre Política de Cancelamento",
+            a: "Cancelamentos devem ser feitos com no mínimo 24h de antecedência para evitarmos a cobrança de taxa de reserva.",
+          },
+        ],
       },
       {
-        q: "Sobre Hydralips",
-        a: "Um tratamento de hidratação profunda que revitaliza o tecido labial, deixando-os com aspecto saudável e jovem.",
+        title: "Formações",
+        items: [
+          {
+            q: "Sobre Mentorias",
+            a: "Oferecemos formações exclusivas para profissionais que desejam elevar o nível técnico e de gestão no mundo da beleza.",
+          },
+        ],
       },
       {
-        q: "Sobre Depilação",
-        a: "Utilizamos métodos que minimizam o desconforto, adequados para todos os tipos de pele, incluindo as mais sensíveis.",
+        title: "O Studio",
+        items: [
+          {
+            q: "Sobre Localização do Studio",
+            a: "Estamos situados em uma zona privilegiada de Lisboa, com facilidade de estacionamento e acesso.",
+          },
+        ],
+      },
+    ],
+    contactTitle: "Ainda tem dúvidas?",
+    contactText: "A nossa equipa está disponível para a ajudar a escolher o tratamento ideal para si.",
+    contactCta: "Falar no WhatsApp",
+  },
+  cookies: {
+    title: "Utilizamos cookies",
+    message:
+      "Usamos cookies para melhorar a sua experiência de navegação, analisar o tráfego do site e apresentar conteúdos de terceiros (como as avaliações do Google). Pode aceitar todos ou manter apenas os essenciais.",
+    acceptAll: "Aceitar todos",
+    essentialOnly: "Apenas essenciais",
+    policyLink: "Política de Privacidade",
+  },
+  privacy: {
+    pageTitle: "Política de Privacidade & Cookies — Bruna Beauty",
+    eyebrow: "Legal",
+    title: "Política de Privacidade",
+    updated: "Última atualização",
+    backHome: "Voltar ao início",
+    intro:
+      "A sua privacidade é importante para nós. Esta política explica quais os dados que recolhemos, como os utilizamos e quais são os seus direitos, em conformidade com o RGPD (Regulamento Geral sobre a Proteção de Dados) e a legislação portuguesa aplicável.",
+    sections: [
+      {
+        heading: "1. Quem somos",
+        body: "O Studio Bruna Beauty é o responsável pelo tratamento dos dados recolhidos através deste website. Para qualquer questão relacionada com privacidade, pode contactar-nos por WhatsApp ou através das nossas redes sociais.",
       },
       {
-        q: "Sobre Remoção de Tatuagem",
-        a: "Realizamos o procedimento com laser de última geração, focado na segurança e eficácia da remoção do pigmento.",
+        heading: "2. Que dados recolhemos",
+        body: "Este website não possui formulários de registo nem área de cliente. Recolhemos apenas dados de navegação de forma agregada e anónima (páginas visitadas, idioma escolhido e tipo de dispositivo). As marcações são efetuadas através de plataformas externas (Fresha e WhatsApp), que têm as suas próprias políticas de privacidade.",
       },
       {
-        q: "Sobre Mentorias",
-        a: "Oferecemos formações exclusivas para profissionais que desejam elevar o nível técnico e de gestão no mundo da beleza.",
+        heading: "3. Cookies",
+        body: "Um cookie é um pequeno ficheiro guardado no seu dispositivo. Utilizamos cookies essenciais (necessários para o funcionamento do site e para recordar o idioma escolhido) e cookies de terceiros: Google Fonts (carregamento de tipos de letra), Cloudinary (alojamento de vídeos e imagens) e Elfsight (widget de avaliações do Google). Os cookies de terceiros só são ativados após o seu consentimento, que pode retirar a qualquer momento limpando os dados do site no seu navegador.",
       },
       {
-        q: "Sobre Política de Cancelamento",
-        a: "Cancelamentos devem ser feitos com no mínimo 24h de antecedência para evitarmos a cobrança de taxa de reserva.",
+        heading: "4. Com quem partilhamos os dados",
+        body: "Não vendemos nem partilhamos os seus dados pessoais para fins comerciais. Partilhamos apenas informação técnica necessária com os prestadores de serviços mencionados acima, estritamente para operar o website.",
       },
       {
-        q: "Sobre Localização do Studio",
-        a: "Estamos situados em uma zona privilegiada de Lisboa, com facilidade de estacionamento e acesso.",
+        heading: "5. Os seus direitos",
+        body: "Ao abrigo do RGPD, tem o direito de aceder, retificar, apagar ou limitar o tratamento dos seus dados, bem como de retirar o consentimento a qualquer momento. Para exercer qualquer um destes direitos, contacte-nos pelos canais indicados.",
+      },
+      {
+        heading: "6. Alterações a esta política",
+        body: "Podemos atualizar esta política periodicamente. Quaisquer alterações serão publicadas nesta página com a data de atualização revista.",
       },
     ],
   },
   footer: {
     rights: "Todos os direitos reservados.",
+    privacy: "Política de Privacidade",
     partnerBefore: "Parceira Oficial Rastelli Global — Use o cupom",
     partnerAfter: "para 10% OFF",
   },
@@ -222,6 +315,16 @@ const en: Dict = {
     ctaBook: "Book Now",
     scroll: "Scroll",
     logoAlt: "Bruna Beauty logo",
+  },
+  novidades: {
+    eyebrow: "Exclusive New Arrival",
+    titleA: "Lash LED UV",
+    titleB: "Technology",
+    description:
+      "Introducing the revolutionary Lash LED UV Technology: a high-power LED UV curing lamp designed to dry and set eyelash extension adhesives in seconds. With low energy consumption, minimal heat and an ergonomic design, it ensures a faster, safer and more comfortable application — for you and your technician. Flawless results with maximum longevity and full respect for the health of your eyes.",
+    cta: "Learn More",
+    badge: "New",
+    videoAlt: "Demonstration video of the Lash LED UV Technology",
   },
   services: {
     eyebrow: "The Experience",
@@ -276,8 +379,8 @@ const en: Dict = {
         description: "Learn the premium lip hydration technique with long-lasting results.",
       },
       laser: {
-        title: "Laser Hair Removal",
-        description: "Practical and theoretical training in state-of-the-art laser technology.",
+        title: "Lash LED UV",
+        description: "Master Lash LED UV Technology and take your extension application to the next level of precision and longevity.",
       },
     },
   },
@@ -312,6 +415,18 @@ const en: Dict = {
     online: "Book Online",
     waMessage: "Hi Bruna! I found you through your website and I'd like to book an appointment! 🤩💜",
   },
+  location: {
+    eyebrow: "Find Us",
+    titleA: "Visit the",
+    titleB: "Studio",
+    addressLabel: "Address",
+    address: "Rua Latino Coelho, Parede, Cascais, Portugal",
+    hoursLabel: "Opening hours",
+    hoursLines: ["Tuesday to Friday • 10am–7pm", "Saturday • 10am–5pm"],
+    transportLabel: "Getting here",
+    transport: "Easy access with parking nearby. Parede train station is just a few minutes away.",
+    cta: "View on Google Maps",
+  },
   reviews: {
     eyebrow: "What our clients say",
     titleA: "Reviews on",
@@ -321,43 +436,114 @@ const en: Dict = {
     eyebrow: "Get your questions answered",
     titleA: "Frequently Asked",
     titleB: "Questions",
-    items: [
+    groups: [
       {
-        q: "About Lashes",
-        a: "We offer more than 12 extension options, from natural to voluminous effects, using hypoallergenic materials to protect the health of your eyes.",
+        title: "Services",
+        items: [
+          {
+            q: "About Lashes",
+            a: "We offer more than 12 extension options, from natural to voluminous effects, using hypoallergenic materials to protect the health of your eyes.",
+          },
+          {
+            q: "About Facial Cleansing",
+            a: "Our deep cleansing includes manual extraction and ultrasonic peeling for complete cell renewal.",
+          },
+          {
+            q: "About Hydralips",
+            a: "A deep hydration treatment that revitalises the lip tissue, leaving lips looking healthy and youthful.",
+          },
+          {
+            q: "About Hair Removal",
+            a: "We use methods that minimise discomfort, suitable for all skin types, including the most sensitive.",
+          },
+          {
+            q: "About Tattoo Removal",
+            a: "We perform the procedure with a state-of-the-art laser, focused on the safety and effectiveness of pigment removal.",
+          },
+        ],
       },
       {
-        q: "About Facial Cleansing",
-        a: "Our deep cleansing includes manual extraction and ultrasonic peeling for complete cell renewal.",
+        title: "Bookings & Cancellations",
+        items: [
+          {
+            q: "How do I book?",
+            a: "You can book directly through the Online Booking button, via WhatsApp, or through our booking page. The booking fee is €15.",
+          },
+          {
+            q: "About the Cancellation Policy",
+            a: "Cancellations must be made at least 24 hours in advance to avoid a booking fee charge.",
+          },
+        ],
       },
       {
-        q: "About Hydralips",
-        a: "A deep hydration treatment that revitalises the lip tissue, leaving lips looking healthy and youthful.",
+        title: "Training",
+        items: [
+          {
+            q: "About Mentorships",
+            a: "We offer exclusive training for professionals who want to raise their technical and management level in the beauty world.",
+          },
+        ],
       },
       {
-        q: "About Hair Removal",
-        a: "We use methods that minimise discomfort, suitable for all skin types, including the most sensitive.",
+        title: "The Studio",
+        items: [
+          {
+            q: "About the Studio Location",
+            a: "We are located in a privileged area of Lisbon, with easy parking and access.",
+          },
+        ],
+      },
+    ],
+    contactTitle: "Still have questions?",
+    contactText: "Our team is available to help you choose the ideal treatment for you.",
+    contactCta: "Chat on WhatsApp",
+  },
+  cookies: {
+    title: "We use cookies",
+    message:
+      "We use cookies to improve your browsing experience, analyse site traffic and display third-party content (such as Google reviews). You can accept all of them or keep only the essential ones.",
+    acceptAll: "Accept all",
+    essentialOnly: "Essential only",
+    policyLink: "Privacy Policy",
+  },
+  privacy: {
+    pageTitle: "Privacy & Cookie Policy — Bruna Beauty",
+    eyebrow: "Legal",
+    title: "Privacy Policy",
+    updated: "Last updated",
+    backHome: "Back to home",
+    intro:
+      "Your privacy is important to us. This policy explains what data we collect, how we use it and what your rights are, in accordance with the GDPR (General Data Protection Regulation) and applicable law.",
+    sections: [
+      {
+        heading: "1. Who we are",
+        body: "Studio Bruna Beauty is the data controller for the information collected through this website. For any privacy-related question, you can contact us via WhatsApp or through our social media.",
       },
       {
-        q: "About Tattoo Removal",
-        a: "We perform the procedure with a state-of-the-art laser, focused on the safety and effectiveness of pigment removal.",
+        heading: "2. What data we collect",
+        body: "This website has no registration forms or customer area. We only collect browsing data in an aggregated, anonymous way (pages visited, chosen language and device type). Bookings are made through external platforms (Fresha and WhatsApp), which have their own privacy policies.",
       },
       {
-        q: "About Mentorships",
-        a: "We offer exclusive training for professionals who want to raise their technical and management level in the beauty world.",
+        heading: "3. Cookies",
+        body: "A cookie is a small file stored on your device. We use essential cookies (required for the site to work and to remember your chosen language) and third-party cookies: Google Fonts (font loading), Cloudinary (video and image hosting) and Elfsight (Google reviews widget). Third-party cookies are only activated after your consent, which you can withdraw at any time by clearing the site data in your browser.",
       },
       {
-        q: "About the Cancellation Policy",
-        a: "Cancellations must be made at least 24 hours in advance to avoid a booking fee charge.",
+        heading: "4. Who we share data with",
+        body: "We do not sell or share your personal data for commercial purposes. We only share the technical information necessary with the service providers mentioned above, strictly to operate the website.",
       },
       {
-        q: "About the Studio Location",
-        a: "We are located in a privileged area of Lisbon, with easy parking and access.",
+        heading: "5. Your rights",
+        body: "Under the GDPR, you have the right to access, rectify, erase or restrict the processing of your data, as well as to withdraw your consent at any time. To exercise any of these rights, please contact us through the channels indicated.",
+      },
+      {
+        heading: "6. Changes to this policy",
+        body: "We may update this policy from time to time. Any changes will be published on this page with a revised update date.",
       },
     ],
   },
   footer: {
     rights: "All rights reserved.",
+    privacy: "Privacy Policy",
     partnerBefore: "Official Rastelli Global Partner — Use code",
     partnerAfter: "for 10% OFF",
   },
@@ -405,6 +591,16 @@ const fr: Dict = {
     ctaBook: "Réserver maintenant",
     scroll: "Défiler",
     logoAlt: "Logo Bruna Beauty",
+  },
+  novidades: {
+    eyebrow: "Nouveauté exclusive",
+    titleA: "Technologie",
+    titleB: "Lash LED UV",
+    description:
+      "Découvrez la révolutionnaire Technologie Lash LED UV : une lampe de polymérisation LED UV haute puissance conçue pour sécher et fixer les colles d'extensions de cils en quelques secondes. Avec une faible consommation d'énergie, un dégagement de chaleur minimal et un design ergonomique, elle garantit une application plus rapide, plus sûre et plus confortable — pour vous comme pour votre professionnelle. Des résultats impeccables, longue tenue et plein respect de la santé de vos yeux.",
+    cta: "En Savoir Plus",
+    badge: "Nouveauté",
+    videoAlt: "Vidéo de démonstration de la Technologie Lash LED UV",
   },
   services: {
     eyebrow: "L'Expérience",
@@ -460,8 +656,8 @@ const fr: Dict = {
         description: "Apprenez la technique premium d'hydratation des lèvres aux résultats durables.",
       },
       laser: {
-        title: "Épilation laser",
-        description: "Formation pratique et théorique à la technologie laser de dernière génération.",
+        title: "Lash LED UV",
+        description: "Maîtrisez la Technologie Lash LED UV et amenez la pose d'extensions à un niveau supérieur de précision et de tenue.",
       },
     },
   },
@@ -496,6 +692,18 @@ const fr: Dict = {
     online: "Réserver en ligne",
     waMessage: "Bonjour Bruna ! Je viens de votre site et j'aimerais réserver un rendez-vous ! 🤩💜",
   },
+  location: {
+    eyebrow: "Où Nous Trouver",
+    titleA: "Visitez le",
+    titleB: "Studio",
+    addressLabel: "Adresse",
+    address: "Rua Latino Coelho, Parede, Cascais, Portugal",
+    hoursLabel: "Horaires",
+    hoursLines: ["Mardi au vendredi • 10h–19h", "Samedi • 10h–17h"],
+    transportLabel: "Comment y venir",
+    transport: "Accès facile et stationnement à proximité. La gare de Parede est à quelques minutes.",
+    cta: "Voir sur Google Maps",
+  },
   reviews: {
     eyebrow: "Avis de nos clientes",
     titleA: "Avis sur",
@@ -505,43 +713,114 @@ const fr: Dict = {
     eyebrow: "Vos questions, nos réponses",
     titleA: "Questions",
     titleB: "Fréquentes",
-    items: [
+    groups: [
       {
-        q: "À propos des cils",
-        a: "Nous proposons plus de 12 options d'extensions, des effets naturels aux effets volumineux, avec des matériaux hypoallergéniques pour préserver la santé de vos yeux.",
+        title: "Services",
+        items: [
+          {
+            q: "À propos des cils",
+            a: "Nous proposons plus de 12 options d'extensions, des effets naturels aux effets volumineux, avec des matériaux hypoallergéniques pour préserver la santé de vos yeux.",
+          },
+          {
+            q: "À propos du nettoyage de peau",
+            a: "Notre nettoyage en profondeur comprend une extraction manuelle et un peeling ultrasonique pour un renouvellement cellulaire complet.",
+          },
+          {
+            q: "À propos de Hydralips",
+            a: "Un soin d'hydratation profonde qui revitalise les lèvres et leur donne un aspect sain et jeune.",
+          },
+          {
+            q: "À propos de l'épilation",
+            a: "Nous utilisons des méthodes qui minimisent l'inconfort, adaptées à tous les types de peau, y compris les plus sensibles.",
+          },
+          {
+            q: "À propos du détatouage",
+            a: "Nous réalisons la procédure avec un laser de dernière génération, axé sur la sécurité et l'efficacité de l'élimination du pigment.",
+          },
+        ],
       },
       {
-        q: "À propos du nettoyage de peau",
-        a: "Notre nettoyage en profondeur comprend une extraction manuelle et un peeling ultrasonique pour un renouvellement cellulaire complet.",
+        title: "Réservations & annulations",
+        items: [
+          {
+            q: "Comment réserver ?",
+            a: "Vous pouvez réserver directement via le bouton Réservation en ligne, par WhatsApp ou via notre page de réservation. Les frais de réservation sont de 15 €.",
+          },
+          {
+            q: "À propos de la politique d'annulation",
+            a: "Les annulations doivent être faites au moins 24 h à l'avance afin d'éviter la facturation des frais de réservation.",
+          },
+        ],
       },
       {
-        q: "À propos de Hydralips",
-        a: "Un soin d'hydratation profonde qui revitalise les lèvres et leur donne un aspect sain et jeune.",
+        title: "Formations",
+        items: [
+          {
+            q: "À propos des mentorats",
+            a: "Nous proposons des formations exclusives pour les professionnelles qui souhaitent élever leur niveau technique et de gestion dans le monde de la beauté.",
+          },
+        ],
       },
       {
-        q: "À propos de l'épilation",
-        a: "Nous utilisons des méthodes qui minimisent l'inconfort, adaptées à tous les types de peau, y compris les plus sensibles.",
+        title: "Le Studio",
+        items: [
+          {
+            q: "À propos de l'emplacement du Studio",
+            a: "Nous sommes situés dans un quartier privilégié de Lisbonne, avec un accès et un stationnement faciles.",
+          },
+        ],
+      },
+    ],
+    contactTitle: "Vous avez encore des questions ?",
+    contactText: "Notre équipe est disponible pour vous aider à choisir le soin idéal pour vous.",
+    contactCta: "Discuter sur WhatsApp",
+  },
+  cookies: {
+    title: "Nous utilisons des cookies",
+    message:
+      "Nous utilisons des cookies pour améliorer votre expérience de navigation, analyser le trafic du site et afficher du contenu tiers (comme les avis Google). Vous pouvez tous les accepter ou ne conserver que l'essentiel.",
+    acceptAll: "Tout accepter",
+    essentialOnly: "Essentiels uniquement",
+    policyLink: "Politique de confidentialité",
+  },
+  privacy: {
+    pageTitle: "Politique de confidentialité & cookies — Bruna Beauty",
+    eyebrow: "Mentions légales",
+    title: "Politique de confidentialité",
+    updated: "Dernière mise à jour",
+    backHome: "Retour à l'accueil",
+    intro:
+      "Votre vie privée est importante pour nous. Cette politique explique quelles données nous collectons, comment nous les utilisons et quels sont vos droits, conformément au RGPD (Règlement général sur la protection des données) et à la législation applicable.",
+    sections: [
+      {
+        heading: "1. Qui sommes-nous",
+        body: "Le Studio Bruna Beauty est le responsable du traitement des données collectées via ce site web. Pour toute question relative à la confidentialité, vous pouvez nous contacter par WhatsApp ou via nos réseaux sociaux.",
       },
       {
-        q: "À propos du détatouage",
-        a: "Nous réalisons la procédure avec un laser de dernière génération, axé sur la sécurité et l'efficacité de l'élimination du pigment.",
+        heading: "2. Quelles données nous collectons",
+        body: "Ce site ne comporte ni formulaire d'inscription ni espace client. Nous collectons uniquement des données de navigation de manière agrégée et anonyme (pages visitées, langue choisie et type d'appareil). Les réservations sont effectuées via des plateformes externes (Fresha et WhatsApp), qui ont leurs propres politiques de confidentialité.",
       },
       {
-        q: "À propos des mentorats",
-        a: "Nous proposons des formations exclusives pour les professionnelles qui souhaitent élever leur niveau technique et de gestion dans le monde de la beauté.",
+        heading: "3. Cookies",
+        body: "Un cookie est un petit fichier stocké sur votre appareil. Nous utilisons des cookies essentiels (nécessaires au fonctionnement du site et pour mémoriser votre langue) et des cookies tiers : Google Fonts (chargement des polices), Cloudinary (hébergement vidéo et image) et Elfsight (widget d'avis Google). Les cookies tiers ne sont activés qu'après votre consentement, que vous pouvez retirer à tout moment en effaçant les données du site dans votre navigateur.",
       },
       {
-        q: "À propos de la politique d'annulation",
-        a: "Les annulations doivent être faites au moins 24 h à l'avance afin d'éviter la facturation des frais de réservation.",
+        heading: "4. Avec qui nous partageons les données",
+        body: "Nous ne vendons ni ne partageons vos données personnelles à des fins commerciales. Nous partageons uniquement les informations techniques nécessaires avec les prestataires mentionnés ci-dessus, strictement pour faire fonctionner le site.",
       },
       {
-        q: "À propos de l'emplacement du Studio",
-        a: "Nous sommes situés dans un quartier privilégié de Lisbonne, avec un accès et un stationnement faciles.",
+        heading: "5. Vos droits",
+        body: "En vertu du RGPD, vous avez le droit d'accéder, de rectifier, d'effacer ou de limiter le traitement de vos données, ainsi que de retirer votre consentement à tout moment. Pour exercer l'un de ces droits, contactez-nous via les canaux indiqués.",
+      },
+      {
+        heading: "6. Modifications de cette politique",
+        body: "Nous pouvons mettre à jour cette politique périodiquement. Toute modification sera publiée sur cette page avec une date de mise à jour révisée.",
       },
     ],
   },
   footer: {
     rights: "Tous droits réservés.",
+    privacy: "Politique de confidentialité",
     partnerBefore: "Partenaire officielle Rastelli Global — Utilisez le code",
     partnerAfter: "pour 10 % de réduction",
   },
@@ -589,6 +868,16 @@ const es: Dict = {
     ctaBook: "Reservar ahora",
     scroll: "Desliza",
     logoAlt: "Logo Bruna Beauty",
+  },
+  novidades: {
+    eyebrow: "Novedad exclusiva",
+    titleA: "Tecnología",
+    titleB: "Lash LED UV",
+    description:
+      "Presentamos la revolucionaria Tecnología Lash LED UV: una lámpara de curado LED UV de alta potencia diseñada para secar y fijar adhesivos de extensiones de pestañas en segundos. Con bajo consumo de energía, calor mínimo y diseño ergonómico, garantiza una aplicación más rápida, segura y cómoda — para ti y para tu profesional. Resultados impecables, máxima duración y total respeto por la salud de tus ojos.",
+    cta: "Saber Más",
+    badge: "Novedad",
+    videoAlt: "Vídeo de demostración de la Tecnología Lash LED UV",
   },
   services: {
     eyebrow: "La Experiencia",
@@ -644,8 +933,8 @@ const es: Dict = {
         description: "Aprende la técnica premium de hidratación labial con resultados duraderos.",
       },
       laser: {
-        title: "Depilación láser",
-        description: "Formación práctica y teórica en tecnología láser de última generación.",
+        title: "Lash LED UV",
+        description: "Domina la Tecnología Lash LED UV y lleva la aplicación de extensiones a otro nivel de precisión y duración.",
       },
     },
   },
@@ -680,6 +969,18 @@ const es: Dict = {
     online: "Reservar online",
     waMessage: "¡Hola Bruna! Vengo a través de tu sitio web y me gustaría reservar una cita 🤩💜",
   },
+  location: {
+    eyebrow: "Dónde Encontrarnos",
+    titleA: "Visita el",
+    titleB: "Studio",
+    addressLabel: "Dirección",
+    address: "Rua Latino Coelho, Parede, Cascais, Portugal",
+    hoursLabel: "Horario",
+    hoursLines: ["Martes a viernes • 10h–19h", "Sábado • 10h–17h"],
+    transportLabel: "Cómo llegar",
+    transport: "Fácil acceso y aparcamiento en las cercanías. La estación de tren de Parede está a pocos minutos.",
+    cta: "Ver en Google Maps",
+  },
   reviews: {
     eyebrow: "Opiniones de nuestras clientas",
     titleA: "Reseñas en",
@@ -689,43 +990,114 @@ const es: Dict = {
     eyebrow: "Resuelve tus dudas",
     titleA: "Preguntas",
     titleB: "Frecuentes",
-    items: [
+    groups: [
       {
-        q: "Sobre las pestañas",
-        a: "Trabajamos con más de 12 opciones de extensiones, desde efectos naturales hasta voluminosos, con materiales hipoalergénicos para cuidar la salud de tus ojos.",
+        title: "Servicios",
+        items: [
+          {
+            q: "Sobre las pestañas",
+            a: "Trabajamos con más de 12 opciones de extensiones, desde efectos naturales hasta voluminosos, con materiales hipoalergénicos para cuidar la salud de tus ojos.",
+          },
+          {
+            q: "Sobre la limpieza facial",
+            a: "Nuestra limpieza profunda incluye extracción manual y peeling ultrasónico para una renovación celular completa.",
+          },
+          {
+            q: "Sobre Hydralips",
+            a: "Un tratamiento de hidratación profunda que revitaliza el tejido labial, dejando los labios con aspecto saludable y joven.",
+          },
+          {
+            q: "Sobre la depilación",
+            a: "Utilizamos métodos que minimizan las molestias, adecuados para todo tipo de piel, incluso las más sensibles.",
+          },
+          {
+            q: "Sobre la eliminación de tatuajes",
+            a: "Realizamos el procedimiento con láser de última generación, centrado en la seguridad y la eficacia de la eliminación del pigmento.",
+          },
+        ],
       },
       {
-        q: "Sobre la limpieza facial",
-        a: "Nuestra limpieza profunda incluye extracción manual y peeling ultrasónico para una renovación celular completa.",
+        title: "Reservas y cancelaciones",
+        items: [
+          {
+            q: "¿Cómo reservo?",
+            a: "Puedes reservar directamente con el botón de Reserva online, por WhatsApp o a través de nuestra página de reservas. La tasa de reserva es de 15 €.",
+          },
+          {
+            q: "Sobre la política de cancelación",
+            a: "Las cancelaciones deben hacerse con un mínimo de 24 h de antelación para evitar el cobro de la tarifa de reserva.",
+          },
+        ],
       },
       {
-        q: "Sobre Hydralips",
-        a: "Un tratamiento de hidratación profunda que revitaliza el tejido labial, dejando los labios con aspecto saludable y joven.",
+        title: "Formaciones",
+        items: [
+          {
+            q: "Sobre las mentorías",
+            a: "Ofrecemos formaciones exclusivas para profesionales que desean elevar su nivel técnico y de gestión en el mundo de la belleza.",
+          },
+        ],
       },
       {
-        q: "Sobre la depilación",
-        a: "Utilizamos métodos que minimizan las molestias, adecuados para todo tipo de piel, incluso las más sensibles.",
+        title: "El Studio",
+        items: [
+          {
+            q: "Sobre la ubicación del Studio",
+            a: "Estamos ubicados en una zona privilegiada de Lisboa, con facilidad de aparcamiento y acceso.",
+          },
+        ],
+      },
+    ],
+    contactTitle: "¿Aún tienes dudas?",
+    contactText: "Nuestro equipo está disponible para ayudarte a elegir el tratamiento ideal para ti.",
+    contactCta: "Hablar por WhatsApp",
+  },
+  cookies: {
+    title: "Usamos cookies",
+    message:
+      "Usamos cookies para mejorar tu experiencia de navegación, analizar el tráfico del sitio y mostrar contenido de terceros (como las reseñas de Google). Puedes aceptarlas todas o mantener solo las esenciales.",
+    acceptAll: "Aceptar todas",
+    essentialOnly: "Solo esenciales",
+    policyLink: "Política de privacidad",
+  },
+  privacy: {
+    pageTitle: "Política de privacidad y cookies — Bruna Beauty",
+    eyebrow: "Legal",
+    title: "Política de privacidad",
+    updated: "Última actualización",
+    backHome: "Volver al inicio",
+    intro:
+      "Tu privacidad es importante para nosotros. Esta política explica qué datos recopilamos, cómo los usamos y cuáles son tus derechos, de conformidad con el RGPD (Reglamento General de Protección de Datos) y la legislación aplicable.",
+    sections: [
+      {
+        heading: "1. Quiénes somos",
+        body: "El Studio Bruna Beauty es el responsable del tratamiento de los datos recopilados a través de este sitio web. Para cualquier cuestión relacionada con la privacidad, puedes contactarnos por WhatsApp o a través de nuestras redes sociales.",
       },
       {
-        q: "Sobre la eliminación de tatuajes",
-        a: "Realizamos el procedimiento con láser de última generación, centrado en la seguridad y la eficacia de la eliminación del pigmento.",
+        heading: "2. Qué datos recopilamos",
+        body: "Este sitio web no tiene formularios de registro ni área de cliente. Solo recopilamos datos de navegación de forma agregada y anónima (páginas visitadas, idioma elegido y tipo de dispositivo). Las reservas se realizan a través de plataformas externas (Fresha y WhatsApp), que tienen sus propias políticas de privacidad.",
       },
       {
-        q: "Sobre las mentorías",
-        a: "Ofrecemos formaciones exclusivas para profesionales que desean elevar su nivel técnico y de gestión en el mundo de la belleza.",
+        heading: "3. Cookies",
+        body: "Una cookie es un pequeño archivo almacenado en tu dispositivo. Utilizamos cookies esenciales (necesarias para el funcionamiento del sitio y para recordar tu idioma) y cookies de terceros: Google Fonts (carga de tipografías), Cloudinary (alojamiento de vídeo e imágenes) y Elfsight (widget de reseñas de Google). Las cookies de terceros solo se activan tras tu consentimiento, que puedes retirar en cualquier momento borrando los datos del sitio en tu navegador.",
       },
       {
-        q: "Sobre la política de cancelación",
-        a: "Las cancelaciones deben hacerse con un mínimo de 24 h de antelación para evitar el cobro de la tarifa de reserva.",
+        heading: "4. Con quién compartimos los datos",
+        body: "No vendemos ni compartimos tus datos personales con fines comerciales. Solo compartimos la información técnica necesaria con los proveedores de servicios mencionados arriba, estrictamente para operar el sitio web.",
       },
       {
-        q: "Sobre la ubicación del Studio",
-        a: "Estamos ubicados en una zona privilegiada de Lisboa, con facilidad de aparcamiento y acceso.",
+        heading: "5. Tus derechos",
+        body: "En virtud del RGPD, tienes derecho a acceder, rectificar, suprimir o limitar el tratamiento de tus datos, así como a retirar tu consentimiento en cualquier momento. Para ejercer cualquiera de estos derechos, contáctanos a través de los canales indicados.",
+      },
+      {
+        heading: "6. Cambios en esta política",
+        body: "Podemos actualizar esta política periódicamente. Cualquier cambio se publicará en esta página con la fecha de actualización revisada.",
       },
     ],
   },
   footer: {
     rights: "Todos los derechos reservados.",
+    privacy: "Política de privacidad",
     partnerBefore: "Socia oficial de Rastelli Global — Usa el cupón",
     partnerAfter: "para un 10 % de descuento",
   },
