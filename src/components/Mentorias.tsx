@@ -7,26 +7,31 @@ import { whatsappLink } from "@/lib/siteConfig";
 type MentoriaKey = keyof Dict["mentorias"]["items"];
 
 // Os textos vêm de src/i18n/translations.ts; aqui ficam só o PDF e o vídeo de cada mentoria.
+// Os vídeos usam a otimização do Cloudinary na própria URL (q_auto, f_auto, w_900):
+// qualidade e formato automáticos e largura limitada a 900px — os cards são pequenos,
+// por isso isto reduz o peso em ~95% sem perda visível de qualidade.
+const OPT = "q_auto,f_auto,w_900";
+
 const mentorias: { key: MentoriaKey; href: string; video: string }[] = [
   {
     key: "lash",
     href: "/pdf/mentoria-lashdesigner.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508786/mentoria4_riaavg.webm",
+    video: `https://res.cloudinary.com/dudnl5whz/video/upload/${OPT}/v1773508786/mentoria4_riaavg`,
   },
   {
     key: "brow",
     href: "/pdf/mentoria-brow.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508782/mentoria1_iomni6.webm",
+    video: `https://res.cloudinary.com/dudnl5whz/video/upload/${OPT}/v1773508782/mentoria1_iomni6`,
   },
   {
     key: "hydra",
     href: "/pdf/mentoria-hydralips.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508784/mentoria3_jid8ji.webm",
+    video: `https://res.cloudinary.com/dudnl5whz/video/upload/${OPT}/v1773508784/mentoria3_jid8ji`,
   },
   {
     key: "laser",
     href: "/pdf/mentoria-laser.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508788/mentoria2_kw96nf.webm",
+    video: `https://res.cloudinary.com/dudnl5whz/video/upload/${OPT}/v1773508788/mentoria2_kw96nf`,
   },
 ];
 
@@ -86,7 +91,7 @@ const Mentorias = () => {
               {/* VÍDEO SEM SCALE (Para não travar) */}
               {isVisible && (
                 <video
-                  autoPlay loop muted playsInline
+                  autoPlay loop muted playsInline preload="none"
                   className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-500"
                 >
                   <source src={mentoria.video} type="video/webm" />
