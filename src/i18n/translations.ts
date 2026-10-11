@@ -43,7 +43,7 @@ const pt = {
     titleA: "Tecnologia",
     titleB: "Lash LED UV",
     description:
-      "Apresentamos a revolucionária Tecnologia Lash LED UV: uma lâmpada de cura por luz LED UV de alta potência, desenvolvida para secar e fixar adesivos de extensão de pestanas em segundos. Com baixo consumo de energia, aquecimento mínimo e design ergonómico, garante uma aplicação mais rápida, segura e confortável — para si e para a sua profissional. Resultados impecáveis, com máxima durabilidade e total respeito pela saúde dos olhos.",
+      "Apresentamos a revolucionária Tecnologia Lash LED UV: uma lâmpada de cura por luz LED UV de alta potência, desenvolvida para secar e fixar adesivos de extensão de pestanas em segundos. Com baixo consumo de energia, luz fria e design ergonómico, garante uma aplicação mais rápida, segura e confortável — para si e para a sua profissional. Resultados impecáveis, com máxima durabilidade e total respeito pela saúde dos olhos.",
     cta: "Saiba Mais",
     badge: "Novidade",
     videoAlt: "Vídeo demonstrativo da Tecnologia Lash LED UV",
@@ -322,7 +322,7 @@ const en: Dict = {
     titleA: "Lash LED UV",
     titleB: "Technology",
     description:
-      "Introducing the revolutionary Lash LED UV Technology: a high-power LED UV curing lamp designed to dry and set eyelash extension adhesives in seconds. With low energy consumption, minimal heat and an ergonomic design, it ensures a faster, safer and more comfortable application — for you and your technician. Flawless results with maximum longevity and full respect for the health of your eyes.",
+      "Introducing the revolutionary Lash LED UV Technology: a high-power LED UV curing lamp designed to dry and set eyelash extension adhesives in seconds. With low energy consumption, cool light and an ergonomic design, it ensures a faster, safer and more comfortable application — for you and your technician. Flawless results with maximum longevity and full respect for the health of your eyes.",
     cta: "Learn More",
     badge: "New",
     videoAlt: "Demonstration video of the Lash LED UV Technology",
@@ -599,7 +599,7 @@ const fr: Dict = {
     titleA: "Technologie",
     titleB: "Lash LED UV",
     description:
-      "Découvrez la révolutionnaire Technologie Lash LED UV : une lampe de polymérisation LED UV haute puissance conçue pour sécher et fixer les colles d'extensions de cils en quelques secondes. Avec une faible consommation d'énergie, un dégagement de chaleur minimal et un design ergonomique, elle garantit une application plus rapide, plus sûre et plus confortable — pour vous comme pour votre professionnelle. Des résultats impeccables, longue tenue et plein respect de la santé de vos yeux.",
+      "Découvrez la révolutionnaire Technologie Lash LED UV : une lampe de polymérisation LED UV haute puissance conçue pour sécher et fixer les colles d'extensions de cils en quelques secondes. Avec une faible consommation d'énergie, une lumière froide et un design ergonomique, elle garantit une application plus rapide, plus sûre et plus confortable — pour vous comme pour votre professionnelle. Des résultats impeccables, longue tenue et plein respect de la santé de vos yeux.",
     cta: "En Savoir Plus",
     badge: "Nouveauté",
     videoAlt: "Vidéo de démonstration de la Technologie Lash LED UV",
@@ -877,7 +877,7 @@ const es: Dict = {
     titleA: "Tecnología",
     titleB: "Lash LED UV",
     description:
-      "Presentamos la revolucionaria Tecnología Lash LED UV: una lámpara de curado LED UV de alta potencia diseñada para secar y fijar adhesivos de extensiones de pestañas en segundos. Con bajo consumo de energía, calor mínimo y diseño ergonómico, garantiza una aplicación más rápida, segura y cómoda — para ti y para tu profesional. Resultados impecables, máxima duración y total respeto por la salud de tus ojos.",
+      "Presentamos la revolucionaria Tecnología Lash LED UV: una lámpara de curado LED UV de alta potencia diseñada para secar y fijar adhesivos de extensiones de pestañas en segundos. Con bajo consumo de energía, luz fría y diseño ergonómico, garantiza una aplicación más rápida, segura y cómoda — para ti y para tu profesional. Resultados impecables, máxima duración y total respeto por la salud de tus ojos.",
     cta: "Saber Más",
     badge: "Novedad",
     videoAlt: "Vídeo de demostración de la Tecnología Lash LED UV",

@@ -47,8 +47,9 @@ const Novidades = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="group grid grid-cols-1 md:grid-cols-2 items-stretch border border-gold/40 luxury-shadow overflow-hidden bg-[#1A1612]"
         >
-          {/* Vídeo vertical (esquerda) */}
-          <div className="relative aspect-[9/16] md:aspect-auto md:min-h-[560px] overflow-hidden">
+          {/* Coluna do vídeo — mobile: full com texto em overlay; desktop: metade à esquerda.
+              Altura sempre definida (fixa no mobile, stretch no desktop) para nunca colapsar. */}
+          <div className="relative w-full h-[480px] md:h-auto md:min-h-[560px] overflow-hidden bg-[#1A1612]">
             <video
               autoPlay
               loop
@@ -62,18 +63,37 @@ const Novidades = () => {
               <source src={NOVIDADES_VIDEO_URL} type="video/mp4" />
             </video>
 
-            {/* Película subtil para o badge respirar sobre o vídeo */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1612]/40 via-transparent to-[#1A1612]/30 pointer-events-none" />
+            {/* Película escura — só no mobile, para o texto overlay respirar */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1612]/85 via-[#1A1612]/45 to-[#1A1612]/50 md:hidden" />
 
-            {/* Badge no canto superior direito do vídeo */}
+            {/* Badge no canto superior direito */}
             <span className="absolute top-4 right-4 z-20 inline-flex items-center gap-2 border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm px-3 py-1.5 font-body text-[10px] tracking-[0.25em] uppercase text-gold font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" aria-hidden="true" />
               {t.novidades.badge}
             </span>
+
+            {/* Texto em overlay — SÓ mobile (sempre visível, pois toque não tem hover) */}
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-8 md:hidden">
+              <p className="font-body text-[10px] tracking-[0.4em] uppercase text-gold/80 mb-3 font-bold">
+                {t.novidades.eyebrow}
+              </p>
+              <h3 className="font-display text-2xl font-light text-white mb-4 leading-tight">
+                {t.novidades.titleA}{" "}
+                <span className="italic text-gold-gradient">{t.novidades.titleB}</span>
+              </h3>
+              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-gold/60 to-transparent mb-4" />
+              <p className="font-elegant text-sm text-white/85 leading-relaxed italic max-w-xs mb-6">
+                {t.novidades.description}
+              </p>
+              <span className="inline-flex items-center gap-2 font-body text-[11px] tracking-luxury uppercase text-gold font-bold">
+                {t.novidades.cta}
+                <ArrowRight size={14} />
+              </span>
+            </div>
           </div>
 
-          {/* Texto (direita) */}
-          <div className="flex flex-col items-start justify-center text-left p-8 sm:p-10 md:p-12 lg:p-14">
+          {/* Texto ao lado — SÓ desktop */}
+          <div className="hidden md:flex flex-col items-start justify-center text-left p-12 lg:p-14">
             <p className="font-body text-[10px] tracking-[0.4em] uppercase text-gold/80 mb-4 font-bold">
               {t.novidades.eyebrow}
             </p>
