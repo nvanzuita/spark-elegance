@@ -1,6 +1,9 @@
 import { Instagram } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { INSTAGRAM_HANDLE, INSTAGRAM_URL, RASTELLI_COUPON, RASTELLI_URL } from "@/lib/siteConfig";
 
 const Footer = () => {
+  const { t } = useLanguage();
   return (
     <footer className="py-16 px-6 border-t border-border">
       <div className="container mx-auto max-w-5xl">
@@ -16,30 +19,30 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-6">
             <a
-              href="https://instagram.com/studio.brunabeauty"
+              href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               <Instagram className="w-4 h-4" />
-              <span className="font-body text-xs tracking-wider">@studio.brunabeauty</span>
+              <span className="font-body text-xs tracking-wider">{INSTAGRAM_HANDLE}</span>
             </a>
           </div>
 
           <p className="font-body text-xs text-muted-foreground tracking-wider">
-            © {new Date().getFullYear()} Bruna Beauty. Todos os direitos reservados.
+            © {new Date().getFullYear()} Bruna Beauty. {t.footer.rights}
           </p>
         </div>
 
         {/* Rastelli Partnership */}
         <div className="mt-10 pt-8 border-t border-border text-center">
           <a
-            href="https://rastelliportugal.com/?bg_ref=3BSrM40lRW"
+            href={RASTELLI_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 font-body text-xs text-muted-foreground hover:text-primary transition-colors tracking-wider"
           >
-            Parceira Oficial Rastelli Global — Use o cupom <span className="text-primary font-medium">BRUNA10</span> para 10% OFF
+            {t.footer.partnerBefore} <span className="text-primary font-medium">{RASTELLI_COUPON}</span> {t.footer.partnerAfter}
           </a>
         </div>
       </div>

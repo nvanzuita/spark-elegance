@@ -1,54 +1,22 @@
 import { motion, Variants, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
-import { Helmet } from "react-helmet-async";
 import { AdvancedVideo } from '@cloudinary/react';
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { auto } from "@cloudinary/url-gen/qualifiers/quality";
-import { cld } from "@/hooks/Cloudinary"; 
+import { cld } from "@/hooks/Cloudinary";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { Dict } from "@/i18n/translations";
 
-const services = [
-  {
-    title: "Pestanas / Lashes",
-    description: "Técnicas avançadas de alongamento para realçar o seu olhar com volume e naturalidade.",
-    icon: "✦",
-    href: "/pdf/catalogocilios.pdf",
-    publicId: "pestanas_i4nnur",
-  },
-  {
-    title: "Lash Lifting",
-    description: "Curvatura e hidratação dos fios naturais para um efeito de rímel duradouro e sofisticado.",
-    icon: "✦",
-    href: "/pdf/catalogolifting.pdf",
-    publicId: "lifting_g24hbt",
-  },
-  {
-    title: "Sobrancelhas / Brows",
-    description: "Design personalizado e micropigmentação para harmonizar as linhas do seu rosto.",
-    icon: "✦",
-    href: "/pdf/catalogobrow.pdf",
-    publicId: "browlami_uwliq6",
-  },
-  {
-    title: "Depilação a Laser",
-    description: "Tecnologia de ponta para uma remoção definitiva e indolor dos pelos indesejados.",
-    icon: "✦",
-    href: "/pdf/catalogobody.pdf",
-    publicId: "depilacao_drvedo",
-  },
-  {
-    title: "Estética Facial",
-    description: "Protocolos exclusivos de rejuvenescimento e cuidados profundos para a saúde da sua pele.",
-    icon: "✦",
-    href: "/pdf/catalogofacial.pdf",
-    publicId: "facial_rvq2il",
-  },
-  {
-    title: "Tattoo Removal",
-    description: "Remoção segura e eficaz de pigmentos com tecnologia laser de última geração.",
-    icon: "✦",
-    href: "/pdf/catalogotattoo.pdf",
-    publicId: "tattoo_kvon7f",
-  },
+type ServiceKey = keyof Dict["services"]["items"];
+
+// Os textos de cada serviço vêm de src/i18n/translations.ts; aqui ficam só o link e o vídeo.
+const services: { key: ServiceKey; href: string; publicId: string }[] = [
+  { key: "lashes", href: "/pdf/catalogocilios.pdf", publicId: "pestanas_i4nnur" },
+  { key: "lifting", href: "/pdf/catalogolifting.pdf", publicId: "lifting_g24hbt" },
+  { key: "brows", href: "/pdf/catalogobrow.pdf", publicId: "browlami_uwliq6" },
+  { key: "laser", href: "/pdf/catalogobody.pdf", publicId: "depilacao_drvedo" },
+  { key: "facial", href: "/pdf/catalogofacial.pdf", publicId: "facial_rvq2il" },
+  { key: "tattoo", href: "/pdf/catalogotattoo.pdf", publicId: "tattoo_kvon7f" },
 ];
 
 const containerVariants: Variants = {
@@ -68,7 +36,9 @@ const cardVariants: Variants = {
   },
 };
 
-const ServiceCard = ({ service }: { service: typeof services[0] }) => {
+const ServiceCard = ({ service }: { service: (typeof services)[number] }) => {
+  const { t } = useLanguage();
+  const item = t.services.items[service.key];
   const cardRef = useRef<HTMLAnchorElement>(null);
   // Alteração: Tipagem correta para o componente do Cloudinary
   const videoRef = useRef<any>(null);
@@ -143,17 +113,17 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
 
       <div className="relative z-20">
         <span className="text-primary text-2xl mb-4 block transition-transform group-hover:-translate-y-1">
-          {service.icon}
+          ✦
         </span>
         <h3 className="font-display text-xl md:text-2xl mb-3 text-white uppercase tracking-tight">
-          {service.title}
+          {item.title}
         </h3>
         <p className="font-body text-sm text-white/60 leading-relaxed mb-6 line-clamp-2">
-          {service.description}
+          {item.description}
         </p>
 
         <div className="flex items-center gap-2 text-[10px] tracking-widest uppercase text-gold font-bold">
-          <span>Ver Detalhes</span>
+          <span>{t.services.details}</span>
           <span className="group-hover:translate-x-1 transition-transform">→</span>
         </div>
       </div>
@@ -162,12 +132,9 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
 };
 
 const Services = () => {
+  const { t } = useLanguage();
   return (
     <section id="servicos" className="py-24 md:py-32 px-6 bg-[#1A1612]">
-      <Helmet>
-        <title>Serviços | Bruna Beauty</title>
-      </Helmet>
-
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0 }}
@@ -176,10 +143,10 @@ const Services = () => {
           className="text-center mb-16"
         >
           <p className="font-body text-[10px] tracking-[0.4em] uppercase text-primary mb-4 font-bold">
-            The Experience
+            {t.services.eyebrow}
           </p>
           <h2 className="font-display text-4xl md:text-6xl font-light text-white">
-            Nossos <span className="text-gold-gradient">Serviços</span>
+            {t.services.titleA} <span className="text-gold-gradient">{t.services.titleB}</span>
           </h2>
           <div className="w-20 h-[1px] bg-gold/30 mx-auto mt-6" />
         </motion.div>
@@ -192,7 +159,7 @@ const Services = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {services.map((service) => (
-            <ServiceCard key={service.title} service={service} />
+            <ServiceCard key={service.key} service={service} />
           ))}
         </motion.div>
       </div>

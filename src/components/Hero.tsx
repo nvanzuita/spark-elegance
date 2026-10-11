@@ -2,9 +2,12 @@ import { motion } from "framer-motion";
 import { AdvancedVideo } from '@cloudinary/react';
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { auto } from "@cloudinary/url-gen/qualifiers/quality"; // ou eco/good conforme teste
-import { cld } from "@/hooks/Cloudinary"; // ajuste o path pro seu cld
+import { cld } from "@/hooks/Cloudinary";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { whatsappLink } from "@/lib/siteConfig";
 
 const Hero = () => {
+  const { t } = useLanguage();
   // Config do vídeo (faça fora do componente se quiser memoizar)
   const heroVideo = cld
     .video("background_xzpxyl")                    // public_id sem extensão
@@ -53,7 +56,7 @@ const Hero = () => {
             <div className="relative w-full h-full rounded-full border border-gold/20 p-6 flex items-center justify-center bg-black/20">
               <img
                 src="/simbolo1.PNG"
-                alt="Logo Bruna Beauty"
+                alt={t.hero.logoAlt}
                 className="w-full h-full object-contain brightness-110"
               />
             </div>
@@ -66,7 +69,7 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="font-body text-[10px] md:text-xs uppercase text-gold mb-6 font-bold tracking-[0.4em]"
         >
-          Studio de Estética & Pestanas
+          {t.hero.eyebrow}
         </motion.p>
 
         <motion.h1
@@ -93,7 +96,7 @@ const Hero = () => {
           transition={{ duration: 1, delay: 1.2 }}
           className="font-body text-base md:text-lg text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          Onde a beleza encontra a excelência. Técnicas avançadas e ambiente sofisticado para resultados que transformam.
+          {t.hero.subtitle}
         </motion.p>
 
         <motion.div
@@ -106,23 +109,23 @@ const Hero = () => {
             href="#servicos"
             className="px-12 py-4 bg-gold-gradient text-[10px] tracking-[0.3em] uppercase text-black font-bold hover:scale-105 transition-transform duration-300 shadow-xl"
           >
-            Explorar Serviços
+            {t.hero.ctaServices}
           </a>
 
           <a
-            href="https://wa.me/+351931920081"
+            href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="px-12 py-4 border border-gold/30 text-[10px] tracking-[0.3em] uppercase text-white hover:bg-gold/10 transition-all duration-300"
           >
-            Reservar Agora
+            {t.hero.ctaBook}
           </a>
         </motion.div>
       </div>
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-        <span className="text-[8px] uppercase tracking-[0.4em] text-gold/50 font-bold">Scroll</span>
+        <span className="text-[8px] uppercase tracking-[0.4em] text-gold/50 font-bold">{t.hero.scroll}</span>
         <div className="w-[1px] h-10 bg-gradient-to-b from-gold to-transparent" />
       </div>
     </section>

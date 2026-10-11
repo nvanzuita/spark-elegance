@@ -1,22 +1,18 @@
 import { useEffect } from "react";
+import { useLanguage } from "@/i18n/LanguageContext";
+
+const ELFSIGHT_SRC = "https://elfsightcdn.com/platform.js";
 
 const Reviews = () => {
-  useEffect(() => {
-    // 1. Injetamos o script do Elfsight
-    const script = document.createElement("script");
-    script.src = "https://elfsightcdn.com/platform.js";
-    script.async = true;
-    // O Elfsight recomenda carregar o platform.js uma única vez
-    document.body.appendChild(script);
+  const { t } = useLanguage();
 
-    return () => {
-      // Limpeza opcional: em SPAs (Single Page Apps), 
-      // ajuda a manter a performance ao navegar
-      const existingScript = document.querySelector(`script[src="${script.src}"]`);
-      if (existingScript) {
-        document.body.removeChild(existingScript);
-      }
-    };
+  useEffect(() => {
+    // O Elfsight só deve ser carregado uma vez; se já estiver na página, não voltamos a inseri-lo.
+    if (document.querySelector(`script[src="${ELFSIGHT_SRC}"]`)) return;
+    const script = document.createElement("script");
+    script.src = ELFSIGHT_SRC;
+    script.async = true;
+    document.body.appendChild(script);
   }, []);
 
   return (
@@ -24,19 +20,16 @@ const Reviews = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <p className="font-body text-xs tracking-ultra uppercase text-primary mb-4">
-            Feedback das nossas clientes
+            {t.reviews.eyebrow}
           </p>
           <h2 className="font-display text-3xl md:text-5xl font-light mb-6">
-            Avaliações no <span className="italic text-gold-gradient">Google</span>
+            {t.reviews.titleA} <span className="italic text-gold-gradient">{t.reviews.titleB}</span>
           </h2>
           <div className="gold-separator w-16 mx-auto" />
         </div>
 
-        {/* 2. A DIV MÁGICA: O Elfsight vai ler este ID e injetar o carrossel aqui */}
-        <div 
-          className="elfsight-app-9ac8bb6a-2d76-4507-9b51-2f4fe62ae5c9" 
-          data-elfsight-app-lazy 
-        />
+        {/* O Elfsight lê este ID e injeta aqui o carrossel de avaliações */}
+        <div className="elfsight-app-9ac8bb6a-2d76-4507-9b51-2f4fe62ae5c9" data-elfsight-app-lazy />
       </div>
     </section>
   );

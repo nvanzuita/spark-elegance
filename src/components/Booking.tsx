@@ -1,8 +1,11 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Clock, CreditCard, CalendarCheck } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { FRESHA_URL, whatsappLink } from "@/lib/siteConfig";
 
 const Booking = () => {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -16,13 +19,13 @@ const Booking = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <p className="font-body text-xs tracking-ultra uppercase text-primary mb-4">Reserva de Experiência</p>
+          <p className="font-body text-xs tracking-ultra uppercase text-primary mb-4">{t.booking.eyebrow}</p>
           <h2 className="font-display text-3xl md:text-5xl font-light mb-6">
-            Garanta o Seu <span className="italic text-gold-gradient">Momento</span>
+            {t.booking.titleA} <span className="italic text-gold-gradient">{t.booking.titleB}</span>
           </h2>
           <div className="gold-separator w-16 mx-auto mb-8" />
           <p className="font-elegant text-lg text-muted-foreground max-w-lg mx-auto">
-            Garanta o seu momento de cuidado exclusivo em nosso Studio.
+            {t.booking.intro}
           </p>
         </motion.div>
 
@@ -30,18 +33,18 @@ const Booking = () => {
           {[
             {
               icon: <Clock className="w-5 h-5 text-primary" />,
-              title: "Horário",
-              lines: ["Terça a Sexta • 10h–19h", "Sábado • 10h–17h"],
+              title: t.booking.hoursTitle,
+              lines: t.booking.hoursLines,
             },
             {
               icon: <CreditCard className="w-5 h-5 text-primary" />,
-              title: "Pagamento",
-              lines: ["MB Way, Numerário", "ou Transferência Bancária"],
+              title: t.booking.paymentTitle,
+              lines: t.booking.paymentLines,
             },
             {
               icon: <CalendarCheck className="w-5 h-5 text-primary" />,
-              title: "Etiqueta",
-              lines: ["Taxa de reserva: 15€", "Cancelamento com 24h antecedência"],
+              title: t.booking.etiquetteTitle,
+              lines: t.booking.etiquetteLines,
             },
           ].map((item, i) => (
             <motion.div
@@ -67,20 +70,20 @@ const Booking = () => {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <a
-            href="https://wa.me/+351931920081?text=Olá%20Bruna!%20Vim%20através%20do%20Site,%20e%20gostaria%20de%20Reservar%20um%20Horário!%20🤩💜"
+            href={whatsappLink(t.booking.waMessage)}
             target="_blank"
             rel="noopener noreferrer"
             className="px-10 py-4 bg-gold-gradient text-xs tracking-luxury uppercase text-primary-foreground font-medium hover:opacity-90 transition-opacity text-center"
           >
-            Reservar via WhatsApp
+            {t.booking.whatsapp}
           </a>
           <a
-            href="https://www.fresha.com/pt/a/studio-bruna-beauty-parede-cascais-rua-latino-coelho-j2dtyrog/booking?allOffer"
+            href={FRESHA_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="px-10 py-4 border border-gold/30 text-xs tracking-luxury uppercase text-foreground hover:border-gold/60 hover:bg-gold/5 transition-all text-center"
           >
-            Reservar Online
+            {t.booking.online}
           </a>
         </motion.div>
       </div>

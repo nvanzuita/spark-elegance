@@ -8,10 +8,12 @@ import Reviews from "@/components/Reviews";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import FloatingBadge from "@/components/FloatingBadge";
+import Seo from "@/components/Seo";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Seo />
       <Navbar />
       <Hero />
       <Services />

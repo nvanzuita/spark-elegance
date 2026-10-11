@@ -1,6 +1,7 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const images = [
   "/bruna1.webp",
@@ -10,6 +11,7 @@ const images = [
 ];
 
 const About = () => {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -37,9 +39,9 @@ const About = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <p className="font-body text-xs tracking-ultra uppercase text-primary mb-4">Nossa História</p>
+          <p className="font-body text-xs tracking-ultra uppercase text-primary mb-4">{t.about.eyebrow}</p>
           <h2 className="font-display text-3xl md:text-5xl font-light mb-6">
-            Conheça a <span className="italic text-gold-gradient">Bruna</span>
+            {t.about.titleA} <span className="italic text-gold-gradient">{t.about.titleB}</span>
           </h2>
           <div className="gold-separator w-16 mx-auto" />
         </motion.div>
@@ -74,12 +76,16 @@ const About = () => {
 
               {/* Botões de Navegação */}
               <button
+                type="button"
+                aria-label={t.about.prev}
                 onClick={prevSlide}
                 className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-background/20 backdrop-blur-md border border-gold/20 text-gold rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10"
               >
                 <ChevronLeft size={20} />
               </button>
               <button
+                type="button"
+                aria-label={t.about.next}
                 onClick={nextSlide}
                 className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-background/20 backdrop-blur-md border border-gold/20 text-gold rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10"
               >
@@ -91,6 +97,8 @@ const About = () => {
                 {images.map((_, i) => (
                   <button
                     key={i}
+                    type="button"
+                    aria-label={`${t.about.goTo} ${i + 1}`}
                     onClick={() => setCurrentIndex(i)}
                     className={`h-1 transition-all rounded-full ${
                       currentIndex === i ? "w-6 bg-gold" : "w-2 bg-white/40"
@@ -110,38 +118,28 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <p className="font-elegant text-xl md:text-2xl text-foreground mb-6 leading-relaxed italic">
-              "Mais do que estética, eu ensino independência, confiança e transformação."
+              "{t.about.quote}"
             </p>
             <div className="space-y-4 font-body text-sm text-muted-foreground leading-relaxed">
-              <p>
-                Olá, eu sou Bruna Rodrigues. Nasci em Cascavel, Paraná, vivi por 11 anos em Balneário Camboriú e em 2021 decidi atravessar o oceano para recomeçar em Lisboa, Portugal.
-              </p>
-              <p>
-                Após mais de 5 anos de atuação na área da estética, percebi que minha missão ia além de atender clientes. Reuni experiências, erros, acertos e aprendizados para criar conteúdo verdadeiramente focado em profissionalizar mulheres sonhadoras e determinadas.
-              </p>
-              <p>
-                Acredito que quando uma mulher se capacita, ela muda não só sua carreira, mas a própria vida.
-              </p>
+              <p>{t.about.p1}</p>
+              <p>{t.about.p2}</p>
+              <p>{t.about.p3}</p>
             </div>
 
             <div className="gold-separator w-full my-8" />
 
             <div className="space-y-3">
-              <h3 className="font-display text-lg">O Studio Bruna Beauty</h3>
+              <h3 className="font-display text-lg">{t.about.studioTitle}</h3>
               <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                Fundado em outubro de 2023, em Portugal, o Studio nasceu com a proposta de oferecer uma experiência exclusiva em estética, onde beleza, técnica e sofisticação caminham lado a lado. Um ambiente cuidadosamente pensado para proporcionar conforto, confiança e uma experiência premium.
+                {t.about.studioText}
               </p>
             </div>
 
             <div className="flex flex-wrap gap-6 mt-8">
-              {[
-                { label: "Excelência", icon: "✨" },
-                { label: "Sofisticação", icon: "✨" },
-                { label: "Inovação", icon: "✨" },
-              ].map((value) => (
-                <div key={value.label} className="flex items-center gap-2 text-xs tracking-luxury uppercase text-primary">
-                  <span>{value.icon}</span>
-                  <span>{value.label}</span>
+              {t.about.values.map((label) => (
+                <div key={label} className="flex items-center gap-2 text-xs tracking-luxury uppercase text-primary">
+                  <span>✨</span>
+                  <span>{label}</span>
                 </div>
               ))}
             </div>

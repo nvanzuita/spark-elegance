@@ -1,31 +1,32 @@
 import { motion, useInView, Variants } from "framer-motion";
 import { useRef } from "react";
-import { Helmet } from "react-helmet-async";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { Dict } from "@/i18n/translations";
+import { whatsappLink } from "@/lib/siteConfig";
 
-const mentorias = [
-  { 
-    title: "Lash Design — Zero a Referência", 
-    description: "Formação completa para dominar a arte das pestanas e se tornar referência no mercado premium.", 
+type MentoriaKey = keyof Dict["mentorias"]["items"];
+
+// Os textos vêm de src/i18n/translations.ts; aqui ficam só o PDF e o vídeo de cada mentoria.
+const mentorias: { key: MentoriaKey; href: string; video: string }[] = [
+  {
+    key: "lash",
     href: "/pdf/mentoria-lashdesigner.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508786/mentoria4_riaavg.webm" 
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508786/mentoria4_riaavg.webm",
   },
-  { 
-    title: "Brow Lamination", 
-    description: "Domine a técnica de laminação de sobrancelhas com acabamento impecável.", 
+  {
+    key: "brow",
     href: "/pdf/mentoria-brow.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508782/mentoria1_iomni6.webm" 
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508782/mentoria1_iomni6.webm",
   },
-  { 
-    title: "HydraLips", 
-    description: "Aprenda a técnica de hidratação labial premium com resultados duradouros.", 
+  {
+    key: "hydra",
     href: "/pdf/mentoria-hydralips.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508784/mentoria3_jid8ji.webm" 
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508784/mentoria3_jid8ji.webm",
   },
-  { 
-    title: "Depilação a Laser", 
-    description: "Formação prática e teórica em tecnologia laser de última geração.", 
+  {
+    key: "laser",
     href: "/pdf/mentoria-laser.pdf",
-    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508788/mentoria2_kw96nf.webm" 
+    video: "https://res.cloudinary.com/dudnl5whz/video/upload/v1773508788/mentoria2_kw96nf.webm",
   },
 ];
 
@@ -47,21 +48,18 @@ const cardVariants: Variants = {
 };
 
 const Mentorias = () => {
+  const { t } = useLanguage();
   const scrollRef = useRef(null);
   const isVisible = useInView(scrollRef, { once: true, margin: "200px" });
 
   return (
     // ALTERAÇÃO: bg-background (seu tom nude/claro) para contrastar com os Serviços (escuros)
     <section id="mentorias" className="py-24 md:py-32 px-6 bg-background">
-      <Helmet>
-        <title>Mentorias Premium | Bruna Beauty</title>
-      </Helmet>
-
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
-          <p className="font-body text-[10px] tracking-[0.4em] uppercase text-primary mb-4 font-bold">Formação Profissional</p>
+          <p className="font-body text-[10px] tracking-[0.4em] uppercase text-primary mb-4 font-bold">{t.mentorias.eyebrow}</p>
           <h2 className="font-display text-4xl md:text-6xl font-light mb-6 text-foreground">
-            Mentorias <span className="italic text-gold-gradient">Premium</span>
+            {t.mentorias.titleA} <span className="italic text-gold-gradient">{t.mentorias.titleB}</span>
           </h2>
           <div className="w-20 h-[1px] bg-gold/30 mx-auto" />
         </div>
@@ -74,9 +72,11 @@ const Mentorias = () => {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
-          {mentorias.map((mentoria) => (
+          {mentorias.map((mentoria) => {
+            const item = t.mentorias.items[mentoria.key];
+            return (
             <motion.a
-              key={mentoria.title}
+              key={mentoria.key}
               variants={cardVariants}
               href={mentoria.href}
               target="_blank"
@@ -99,30 +99,30 @@ const Mentorias = () => {
                 <span className="text-primary text-xl mt-1 shrink-0">✧</span>
                 <div>
                   <h3 className="font-display text-xl md:text-2xl mb-2 text-white">
-                    {mentoria.title}
+                    {item.title}
                   </h3>
                   <p className="font-body text-sm text-white/60 leading-relaxed max-w-md">
-                    {mentoria.description}
+                    {item.description}
                   </p>
                   <div className="mt-4 flex items-center gap-2 text-[10px] tracking-widest uppercase text-gold font-bold transition-all">
-                    <span>Ver Programa</span>
+                    <span>{t.mentorias.program}</span>
                     <span className="group-hover:translate-x-2 transition-transform">→</span>
                   </div>
                 </div>
               </div>
             </motion.a>
-          ))}
+            );
+          })}
         </motion.div>
 
-        {/* BOTÃO DOURADO ORIGINAL (Recuperado) */}
         <div className="text-center mt-16">
           <a
-            href="https://wa.me/+351931920081"
+            href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-12 py-4 bg-gold-gradient text-black text-xs tracking-luxury uppercase font-bold hover:scale-105 transition-transform shadow-xl"
           >
-            Reservar Vaga via WhatsApp
+            {t.mentorias.cta}
           </a>
         </div>
       </div>
