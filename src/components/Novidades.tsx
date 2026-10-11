@@ -1,29 +1,24 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { AdvancedVideo } from "@cloudinary/react";
-import { fill } from "@cloudinary/url-gen/actions/resize";
-import { auto } from "@cloudinary/url-gen/qualifiers/quality";
 import { ArrowRight } from "lucide-react";
-import { cld } from "@/hooks/Cloudinary";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { whatsappLink } from "@/lib/siteConfig";
 
-// Secção "Novidades": destaca a Tecnologia Lash LED UV. Usa o mesmo vídeo do
-// Hero como placeholder (a URL será trocada depois pelo vídeo do produto).
-const NOVIDADES_PUBLIC_ID = "background_xzpxyl";
+// Secção "Novidades": destaca a Tecnologia Lash LED UV.
+// Vídeo em paisagem (largura total do card, via object-cover).
+// ⚠️ O vídeo atual ainda é o placeholder VERTICAL — quando colocar o vídeo
+// HORIZONTAL definitivo, basta substituir as duas URLs abaixo (ou o public_id).
+// Dica: para vídeos horizontais, pode voltar a adicionar ",w_1400" na URL para
+// limitar a resolução e poupar banda.
+const NOVIDADES_VIDEO_URL =
+  "https://res.cloudinary.com/dudnl5whz/video/upload/q_auto,f_auto/v1791721856/videolashleduv_ci2qts";
+const NOVIDADES_POSTER_URL =
+  "https://res.cloudinary.com/dudnl5whz/video/upload/q_auto,f_auto,so_0/v1791721856/videolashleduv_ci2qts.jpg";
 
 const Novidades = () => {
   const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const videoAsset = cld
-    .video(NOVIDADES_PUBLIC_ID)
-    .resize(fill().width(1400).height(800).gravity("auto"))
-    .quality(auto())
-    .format("auto");
-
-  const posterUrl = cld.video(NOVIDADES_PUBLIC_ID).quality("auto").format("auto").toURL();
 
   return (
     <section id="novidades" className="py-24 md:py-32 px-6 bg-background">
@@ -56,17 +51,20 @@ const Novidades = () => {
           className="group relative block border border-gold/40 luxury-shadow overflow-hidden"
         >
           <div className="relative aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-[#1A1612]">
-            <AdvancedVideo
-              cldVid={videoAsset}
+            {/* Vídeo em paisagem (largura total). object-cover preenche o card.
+                Otimizado com q_auto,f_auto — comprime sem forçar resolução. */}
+            <video
               autoPlay
               loop
               muted
               playsInline
               preload="metadata"
-              poster={posterUrl}
+              poster={NOVIDADES_POSTER_URL}
               aria-label={t.novidades.videoAlt}
-              className="w-full h-full object-cover transition-transform duration-1200 ease-out group-hover:scale-[1.04]"
-            />
+              className="w-full h-full object-cover transition-transform duration-1200 ease-out group-hover:scale-[1.03]"
+            >
+              <source src={NOVIDADES_VIDEO_URL} type="video/mp4" />
+            </video>
 
             {/* Película: mais escura por base (para o texto em toque); no desktop clareia e escurece no hover */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#1A1612]/85 via-[#1A1612]/45 to-[#1A1612]/50 transition-all duration-500 md:from-[#1A1612]/50 md:via-transparent md:to-transparent md:group-hover:from-[#1A1612]/90 md:group-hover:via-[#1A1612]/55 md:group-hover:to-[#1A1612]/60" />

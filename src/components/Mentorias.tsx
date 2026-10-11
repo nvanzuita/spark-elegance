@@ -12,7 +12,7 @@ type MentoriaKey = keyof Dict["mentorias"]["items"];
 // por isso isto reduz o peso em ~95% sem perda visível de qualidade.
 const OPT = "q_auto,f_auto,w_900";
 
-const mentorias: { key: MentoriaKey; href: string; video: string }[] = [
+const mentorias: { key: MentoriaKey; href: string; video: string; unavailable?: boolean }[] = [
   {
     key: "lash",
     href: "/pdf/mentoria-lashdesigner.pdf",
@@ -27,10 +27,11 @@ const mentorias: { key: MentoriaKey; href: string; video: string }[] = [
     key: "hydra",
     href: "/pdf/mentoria-hydralips.pdf",
     video: `https://res.cloudinary.com/dudnl5whz/video/upload/${OPT}/v1773508784/mentoria3_jid8ji`,
+    unavailable: true,
   },
   {
     key: "laser",
-    href: "/pdf/mentoria-laser.pdf",
+    href: "/pdf/mentoria-leduv.pdf",
     video: `https://res.cloudinary.com/dudnl5whz/video/upload/${OPT}/v1773508788/mentoria2_kw96nf`,
   },
 ];
@@ -88,6 +89,13 @@ const Mentorias = () => {
               rel="noopener noreferrer"
               className="group relative flex items-center min-h-[280px] overflow-hidden p-8 border border-gold/10 bg-[#1E1A16] luxury-shadow"
             >
+              {/* Badge "Indisponível" (canto superior direito) para mentorias em pausa */}
+              {mentoria.unavailable && (
+                <span className="absolute top-4 right-4 z-30 inline-flex items-center border border-white/15 bg-[#3a3a3a]/90 backdrop-blur-sm px-3 py-1.5 font-body text-[9px] tracking-[0.2em] uppercase text-white/70 font-medium">
+                  {t.mentorias.unavailable}
+                </span>
+              )}
+
               {/* VÍDEO SEM SCALE (Para não travar) */}
               {isVisible && (
                 <video

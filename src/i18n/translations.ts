@@ -86,6 +86,7 @@ const pt = {
     titleB: "Premium",
     program: "Ver Programa",
     cta: "Reservar Vaga via WhatsApp",
+    unavailable: "Indisponível no momento",
     items: {
       lash: {
         title: "Lash Design — Zero a Referência",
@@ -364,6 +365,7 @@ const en: Dict = {
     titleB: "Mentorships",
     program: "View Program",
     cta: "Reserve Your Spot on WhatsApp",
+    unavailable: "Currently unavailable",
     items: {
       lash: {
         title: "Lash Design — From Zero to Reference",
@@ -641,6 +643,7 @@ const fr: Dict = {
     titleB: "Premium",
     program: "Voir le programme",
     cta: "Réserver votre place sur WhatsApp",
+    unavailable: "Actuellement indisponible",
     items: {
       lash: {
         title: "Lash Design — De zéro à référence",
@@ -918,6 +921,7 @@ const es: Dict = {
     titleB: "Premium",
     program: "Ver programa",
     cta: "Reservar plaza por WhatsApp",
+    unavailable: "No disponible actualmente",
     items: {
       lash: {
         title: "Lash Design — De cero a referente",
