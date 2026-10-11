@@ -37,7 +37,8 @@ const Novidades = () => {
           <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent mx-auto" />
         </motion.div>
 
-        {/* Cartão lado a lado: vídeo vertical + texto (sempre visível) */}
+        {/* Cartão interativo: só o vídeo aparece; ao passar o mouse o texto entra
+            (transição estilo carrossel). Em ecrãs de toque o texto fica sempre visível. */}
         <motion.a
           href={whatsappLink()}
           target="_blank"
@@ -45,55 +46,33 @@ const Novidades = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="group grid grid-cols-1 md:grid-cols-2 items-stretch border border-gold/40 luxury-shadow overflow-hidden bg-[#1A1612]"
+          className="group relative block w-full h-[560px] md:h-[640px] overflow-hidden border border-gold/40 luxury-shadow bg-[#1A1612]"
         >
-          {/* Coluna do vídeo — mobile: full com texto em overlay; desktop: metade à esquerda.
-              Altura sempre definida (fixa no mobile, stretch no desktop) para nunca colapsar. */}
-          <div className="relative w-full h-[480px] md:h-auto md:min-h-[560px] overflow-hidden bg-[#1A1612]">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-              poster={NOVIDADES_POSTER_URL}
-              aria-label={t.novidades.videoAlt}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1200 ease-out group-hover:scale-[1.03]"
-            >
-              <source src={NOVIDADES_VIDEO_URL} type="video/mp4" />
-            </video>
+          {/* Vídeo — camada de fundo, com leve zoom no hover */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster={NOVIDADES_POSTER_URL}
+            aria-label={t.novidades.videoAlt}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
+          >
+            <source src={NOVIDADES_VIDEO_URL} type="video/mp4" />
+          </video>
 
-            {/* Película escura — só no mobile, para o texto overlay respirar */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1612]/85 via-[#1A1612]/45 to-[#1A1612]/50 md:hidden" />
+          {/* Overlay escuro — só no hover (ou sempre em ecrãs de toque) */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1612] via-[#1A1612]/85 to-[#1A1612]/60 opacity-0 transition-opacity duration-500 group-hover:opacity-100 [@media(hover:none)]:opacity-100" />
 
-            {/* Badge no canto superior direito */}
-            <span className="absolute top-4 right-4 z-20 inline-flex items-center gap-2 border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm px-3 py-1.5 font-body text-[10px] tracking-[0.25em] uppercase text-gold font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" aria-hidden="true" />
-              {t.novidades.badge}
-            </span>
+          {/* Badge no canto superior direito */}
+          <span className="absolute top-4 right-4 z-20 inline-flex items-center gap-2 border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm px-3 py-1.5 font-body text-[10px] tracking-[0.25em] uppercase text-gold font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" aria-hidden="true" />
+            {t.novidades.badge}
+          </span>
 
-            {/* Texto em overlay — SÓ mobile (sempre visível, pois toque não tem hover) */}
-            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-8 md:hidden">
-              <p className="font-body text-[10px] tracking-[0.4em] uppercase text-gold/80 mb-3 font-bold">
-                {t.novidades.eyebrow}
-              </p>
-              <h3 className="font-display text-2xl font-light text-white mb-4 leading-tight">
-                {t.novidades.titleA}{" "}
-                <span className="italic text-gold-gradient">{t.novidades.titleB}</span>
-              </h3>
-              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-gold/60 to-transparent mb-4" />
-              <p className="font-elegant text-sm text-white/85 leading-relaxed italic max-w-xs mb-6">
-                {t.novidades.description}
-              </p>
-              <span className="inline-flex items-center gap-2 font-body text-[11px] tracking-luxury uppercase text-gold font-bold">
-                {t.novidades.cta}
-                <ArrowRight size={14} />
-              </span>
-            </div>
-          </div>
-
-          {/* Texto ao lado — SÓ desktop */}
-          <div className="hidden md:flex flex-col items-start justify-center text-left p-12 lg:p-14">
+          {/* Texto — escondido, entra no hover (estilo carrossel); visível em toque */}
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-10 opacity-0 translate-y-8 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0 [@media(hover:none)]:opacity-100 [@media(hover:none)]:translate-y-0">
             <p className="font-body text-[10px] tracking-[0.4em] uppercase text-gold/80 mb-4 font-bold">
               {t.novidades.eyebrow}
             </p>
@@ -102,12 +81,20 @@ const Novidades = () => {
               <span className="italic text-gold-gradient">{t.novidades.titleB}</span>
             </h3>
             <div className="w-16 h-[1px] bg-gradient-to-r from-gold/60 to-transparent mb-6" />
-            <p className="font-elegant text-base md:text-lg text-white/80 leading-relaxed italic mb-8">
+            <p className="font-elegant text-base md:text-lg text-white/80 leading-relaxed italic mb-8 max-w-lg">
               {t.novidades.description}
             </p>
             <span className="inline-flex items-center gap-2 font-body text-[11px] tracking-luxury uppercase text-gold font-bold group-hover:text-white transition-colors duration-300">
               {t.novidades.cta}
               <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
+          </div>
+
+          {/* Hint "passe o mouse para ler" — visível por padrão, some no hover; oculto em toque */}
+          <div className="absolute inset-x-0 bottom-8 z-20 flex justify-center transition-all duration-300 group-hover:opacity-0 group-hover:translate-y-2 [@media(hover:none)]:hidden">
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-[#1A1612]/70 backdrop-blur-sm px-4 py-2 font-body text-[10px] md:text-[11px] tracking-[0.25em] uppercase text-gold font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" aria-hidden="true" />
+              {t.novidades.hoverHint}
             </span>
           </div>
         </motion.a>
