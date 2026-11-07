@@ -1,4 +1,4 @@
-import { motion, Variants, useInView } from "framer-motion";
+﻿import { motion, Variants, useInView } from "framer-motion";
 import { useRef, useEffect, useCallback } from "react";
 import { AdvancedVideo } from '@cloudinary/react';
 import { fill } from "@cloudinary/url-gen/actions/resize";
@@ -9,14 +9,23 @@ import type { Dict } from "@/i18n/translations";
 
 type ServiceKey = keyof Dict["services"]["items"];
 
-// Os textos de cada serviço vêm de src/i18n/translations.ts; aqui ficam só o link e o vídeo.
-const services: { key: ServiceKey; href: string; publicId: string }[] = [
-  { key: "lashes", href: "/pdf/catalogocilios.pdf", publicId: "pestanas_i4nnur" },
-  { key: "lifting", href: "/pdf/catalogolifting.pdf", publicId: "lifting_g24hbt" },
-  { key: "brows", href: "/pdf/catalogobrow.pdf", publicId: "browlami_uwliq6" },
-  { key: "laser", href: "/pdf/catalogobody.pdf", publicId: "depilacao_drvedo" },
-  { key: "facial", href: "/pdf/catalogofacial.pdf", publicId: "facial_rvq2il" },
-  { key: "tattoo", href: "/pdf/catalogotattoo.pdf", publicId: "tattoo_kvon7f" },
+// Mapeia a key do translations para o slug do catálogo
+const KEY_TO_SLUG: Record<ServiceKey, string> = {
+  lashes: "pestanas-lashes",
+  lifting: "lash-lifting",
+  brows: "sobrancelhas-brows",
+  laser: "depilacao-laser",
+  facial: "estetica-facial",
+  tattoo: "remocao-tatuagem",
+};
+
+const services: { key: ServiceKey; publicId: string }[] = [
+  { key: "lashes", publicId: "pestanas_i4nnur" },
+  { key: "lifting", publicId: "lifting_g24hbt" },
+  { key: "brows", publicId: "browlami_uwliq6" },
+  { key: "laser", publicId: "depilacao_drvedo" },
+  { key: "facial", publicId: "facial_rvq2il" },
+  { key: "tattoo", publicId: "tattoo_kvon7f" },
 ];
 
 const containerVariants: Variants = {
@@ -40,7 +49,6 @@ const ServiceCard = ({ service }: { service: (typeof services)[number] }) => {
   const { t } = useLanguage();
   const item = t.services.items[service.key];
   const cardRef = useRef<HTMLAnchorElement>(null);
-  // Ref da instância do AdvancedVideo; o elemento <video> real fica em .videoElement.
   const videoRef = useRef<InstanceType<typeof AdvancedVideo>>(null);
 
   const isInView = useInView(cardRef, {
@@ -48,13 +56,11 @@ const ServiceCard = ({ service }: { service: (typeof services)[number] }) => {
     margin: "0px 0px 300px 0px",
   });
 
-  // Acede ao elemento <video> real dentro da instância do AdvancedVideo.
   const getVideo = useCallback(
     () => (videoRef.current as unknown as { videoElement?: HTMLVideoElement } | null)?.videoElement,
     []
   );
 
-  // Função segura para dar play
   const safePlay = useCallback(() => {
     const video = getVideo();
     if (video && typeof video.play === 'function') {
@@ -62,11 +68,10 @@ const ServiceCard = ({ service }: { service: (typeof services)[number] }) => {
     }
   }, [getVideo]);
 
-  // Função segura para dar pause
   const safePause = useCallback(() => {
     const video = getVideo();
     if (video && typeof video.pause === 'function') {
-      video.pause();
+      video.pause().catch(() => {});
     }
   }, [getVideo]);
 
@@ -78,6 +83,8 @@ const ServiceCard = ({ service }: { service: (typeof services)[number] }) => {
     }
   }, [isInView, safePlay, safePause]);
 
+  const href = `/catalogo/${KEY_TO_SLUG[service.key]}`;
+
   const videoAsset = cld
     .video(service.publicId)
     .resize(fill().width(800).height(600).gravity("auto"))
@@ -88,11 +95,9 @@ const ServiceCard = ({ service }: { service: (typeof services)[number] }) => {
 
   return (
     <motion.a
-      ref={cardRef} 
+      ref={cardRef}
       variants={cardVariants}
-      href={service.href}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={href}
       className="group relative overflow-hidden p-8 md:p-10 border border-white/5 bg-[#1E1A16] min-h-[350px] flex flex-col justify-end transition-all duration-300 will-change-transform"
       onMouseEnter={safePlay}
       onMouseLeave={safePause}
@@ -104,7 +109,7 @@ const ServiceCard = ({ service }: { service: (typeof services)[number] }) => {
           loop
           muted
           playsInline
-          autoPlay // Adicionado para garantir o play inicial
+          autoPlay
           preload="auto"
           poster={posterUrl}
           className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none"

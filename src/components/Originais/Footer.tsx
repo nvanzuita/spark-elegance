@@ -16,13 +16,13 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-6">
             <a
-              href="https://instagram.com/studio.brunabeauty"
+              href="https://instagram.com/brunabeauty.eu"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               <Instagram className="w-4 h-4" />
-              <span className="font-body text-xs tracking-wider">@studio.brunabeauty</span>
+              <span className="font-body text-xs tracking-wider">@brunabeauty.eu</span>
             </a>
           </div>
 

@@ -10,6 +10,8 @@ import { CookieConsentProvider } from "./hooks/useCookieConsent";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
+import ServicoDetalhe from "./pages/ServicoDetalhe";
+import CatalogoServicos from "./pages/CatalogoServicos";
 import CookieBanner from "./components/CookieBanner";
 
 const queryClient = new QueryClient();
@@ -36,6 +38,8 @@ const App = () => (
             {/* --- Rotas Públicas --- */}
             <Route path="/" element={<Index />} />
             <Route path="/politica-de-privacidade" element={<Privacy />} />
+            <Route path="/servicos/:slug" element={<ServicoDetalhe />} />
+            <Route path="/catalogo/:categoria" element={<CatalogoServicos />} />
             {/* Rota de Erro */}
             <Route path="*" element={<NotFound />} />
           </Routes>

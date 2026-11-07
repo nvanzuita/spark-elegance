@@ -14,8 +14,8 @@ export const FRESHA_URL =
   "https://www.fresha.com/pt/a/studio-bruna-beauty-parede-cascais-rua-latino-coelho-j2dtyrog/booking?allOffer";
 
 export const ACADEMY_URL = "https://academy.brunabeauty.eu";
-export const INSTAGRAM_URL = "https://instagram.com/studio.brunabeauty";
-export const INSTAGRAM_HANDLE = "@studio.brunabeauty";
+export const INSTAGRAM_URL = "https://instagram.com/brunabeauty.eu";
+export const INSTAGRAM_HANDLE = "@brunabeauty.eu";
 
 export const RASTELLI_URL = "https://rastelliportugal.com/?bg_ref=3BSrM40lRW";
 export const RASTELLI_COUPON = "BRUNA10";

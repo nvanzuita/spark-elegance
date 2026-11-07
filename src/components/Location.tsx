@@ -5,7 +5,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 
 // Embed do Google Maps por query (não precisa de API key). Centralizado no
 // endereço do studio. Trocar a query se a morada exata mudar.
-const MAP_QUERY = "Rua Latino Coelho, Parede, Cascais, Portugal";
+const MAP_QUERY = "Rua Latino Coelho, Sala 20, Parede, Cascais, Portugal";
 const MAP_EMBED_SRC = `https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&output=embed`;
 const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_QUERY)}`;
 
